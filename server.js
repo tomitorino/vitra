@@ -8,7 +8,10 @@ const devices = require("./devices.json");
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.set("view engine", "ejs");
+
 app.get("/", function (req, res) {
+  /*
   console.log(devices.RECORDS.length);
   const deviceOne = devices.RECORDS[1].name;
   const theRandom = Math.floor(Math.random() * (10633 - 1)) + 1;
@@ -18,7 +21,8 @@ app.get("/", function (req, res) {
   res.write("<img src='" + randomImg + "'></img>");
   //res.write("<h2>Name of this device is: " + deviceOne + "</h2>");
   res.send();
-  //res.sendFile(__dirname + "/index.html");
+  */
+  res.sendFile(__dirname + "/index.html");
 });
 
 app.post("/index.html", function (req, res) {
@@ -29,7 +33,3 @@ app.post("/index.html", function (req, res) {
 app.listen(process.env.PORT || 3000, function () {
   console.log("Server started on port 3000");
 });
-
-/*
-
-*/
