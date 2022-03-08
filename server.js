@@ -36,10 +36,10 @@ app.post("/index.html", function (req, res) {
   res.send("Thanks for sending that.");
 });
 
+let port = process.env.PORT;
 
-let port = process.env.PORT
-if(port == null || port = ""){
-  port = 3000
+if (port == null || port == "") {
+  port = 3000;
 }
 
 app.listen(port, function () {
