@@ -1,11 +1,16 @@
 //jshint esversion:6
 
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
-const https = require("https");
-const devices = require("./devices.json");
+const ejs = require("ejs");
 const mongoose = require("mongoose");
-const _ = require("lodash");
+const session = require("express-session");
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const findOrCreate = require("mongoose-findorcreate");
+const devices = require("./devices.json");
 
 const app = express();
 
@@ -19,22 +24,23 @@ mongoose.connect(
 );
 
 app.get("/", function (req, res) {
-  console.log(devices.RECORDS.length);
-  const deviceOne = devices.RECORDS[1].name;
-  const theRandom = Math.floor(Math.random() * (10633 - 1)) + 1;
-  const randomImg = devices.RECORDS[theRandom].picture;
-  const randomDevice = devices.RECORDS[theRandom].name;
-  res.write("<h1>Random device: " + randomDevice + "</h1>");
-  res.write("<img src='" + randomImg + "'></img>");
-  //res.write("<h2>Name of this device is: " + deviceOne + "</h2>");
-  res.send();
-  //res.sendFile(__dirname + "/index.html");
+  res.render("index");
 });
 
+app.get("/privacy", function (req, res) {
+  res.render("privacy");
+});
+
+app.get("/about", function (req, res) {
+  res.render("about");
+});
+
+/*
 app.post("/index.html", function (req, res) {
   console.log(req.body);
   res.send("Thanks for sending that.");
 });
+*/
 
 let port = process.env.PORT;
 
