@@ -1,0 +1,27 @@
+/* --- MAIN EDITS --- */
+body {
+  font-family: "Poppins", sans-serif;
+}
+/* LOGIN FORM */
+.login-form {
+  padding: 10%;
+}
+
+.login-form .container {
+  padding-top: 5%;
+  padding-bottom: 5%;
+  border: solid;
+  border-width: 0.5px;
+  border-radius: 25px;
+  border-color: lightgray;
+}
+
+.login-title {
+  font-weight: bold;
+}
+/* FOOTER */
+.footer {
+  background-color: blue;
+  color: white;
+  padding: 1%;
+}
