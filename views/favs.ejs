@@ -1,0 +1,57 @@
+<%- include('./partials/header') %>
+<!-- -->
+<% if(typeof user != 'undefined') { %>
+<!-- -->
+<%- include('./partials/logout-nav') %>
+<!-- -->
+<% } else { %>
+<!-- -->
+<%- include('./partials/login-nav') %>
+<!-- -->
+<% } %>
+
+<h1>Favoritos</h1>
+
+<div class="container favContainer">
+  <div class="row justify-content-center">
+    <% for(var i = 0; i < item.length; i++){ %>
+    <div class="col-lg-4 col-md-4 col-sm-12 favItem">
+      <div class="card mb-3 itemCard">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img
+              src="<%= device[item[i].id].picture %>"
+              class="img-fluid rounded-start"
+              alt="<%= device[item[i].id].name %>"
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><%= device[item[i].id].name %></h5>
+              <p class="card-text">
+                This is a wider card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit
+                longer.
+              </p>
+              <p class="card-text">
+                <small class="text-muted">Item ID: <%= item[i].id %></small>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <button class="btn btn-danger">X</button>
+            </div>
+            <div class="col-6">
+              <button class="btn btn-info">Info</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<!-- -->
+<%- include('./partials/footer') %>

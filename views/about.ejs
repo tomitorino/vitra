@@ -1,0 +1,16 @@
+<%- include('./partials/header') %>
+<!-- -->
+<% if(typeof user != 'undefined') { %>
+<!-- -->
+<%- include('./partials/logout-nav') %>
+<!-- -->
+<% } else { %>
+<!-- -->
+<%- include('./partials/login-nav') %>
+<!-- -->
+<% } %>
+
+<h1>ABOUT</h1>
+
+<!-- -->
+<%- include('./partials/footer') %>

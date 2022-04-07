@@ -1,0 +1,102 @@
+<%- include('./partials/header') %>
+<!-- -->
+<%- include('./partials/logout-nav') %>
+<!-- -->
+
+<div class="container main-app">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="container frame">
+        <div class="row justify-content-center">
+          <div class="col-4 img-col">
+            <img src="<%= device.picture %>" class="device-img" />
+          </div>
+          <div class="col-8 details-col">
+            <div class="container">
+              <div class="row">
+                <div class="col-12">
+                  <h1><%= device.name %></h1>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <p>Lanzamiento: <%= release %></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <h3>Almacenamiento:</h3>
+                  <p><%= device.storage %></p>
+                  <div class="progress">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      style="width: 25%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-12">
+                  <h3>Memoria RAM:</h3>
+                  <p><%= device.ram %></p>
+                  <div class="progress">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      style="width: 50%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-12">
+                  <h3>Batería:</h3>
+                  <p><%= device.battery_size %></p>
+                  <div class="progress">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      style="width: 25%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-12">
+                  <h4>Costo:</h4>
+                  <p>$$$$</p>
+                </div>
+              </div>
+              <br />
+              <form action="/fav" method="post">
+                <input
+                  type="text"
+                  name="deviceId"
+                  value="<%= device.id %>"
+                  hidden
+                />
+                <button type="submit" class="btn btn-info">LIKE</button>
+              </form>
+              <form action="/next" method="post">
+                <input
+                  type="text"
+                  name="deviceId"
+                  value="<%= device.id %>"
+                  hidden
+                />
+                <button type="submit" class="btn btn-dark">NEXT</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- -->
+<%- include('./partials/footer') %>

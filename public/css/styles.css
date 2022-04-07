@@ -1,7 +1,34 @@
 /* --- MAIN EDITS --- */
+
 body {
   font-family: "Poppins", sans-serif;
 }
+
+.indexSection {
+  background-position: bottom;
+  background-repeat: no-repeat;
+  /*background-size: cover; */
+}
+
+/* INDEX */
+.mainIndexText {
+  font-family: "Rubik Mono One", sans-serif;
+  color: white;
+  padding: 9%;
+}
+
+.mainIndexAppDownload {
+  padding: 3%;
+}
+
+.indexText {
+  font-size: 56px;
+}
+
+.exploreNow {
+  padding: 5%;
+}
+
 /* LOGIN FORM */
 .login-form {
   padding: 10%;
@@ -19,9 +46,48 @@ body {
 .login-title {
   font-weight: bold;
 }
+
+/* APP */
+
+.main-app {
+  margin-top: 3%;
+  margin-bottom: 3%;
+  padding: 2%;
+  border: double;
+}
+
+.frame {
+  border: solid;
+  padding: 2%;
+}
+
+.img-col {
+  border: double;
+  text-align: center;
+  padding: 5%;
+  vertical-align: middle;
+  align-items: center;
+}
+
+.details-col {
+  border: double;
+}
+
+/* FAVS */
+
+.favItem {
+  padding: 1%;
+}
+
+.itemCard {
+  padding: 2%;
+  height: 100%;
+  width: 100%;
+}
+
 /* FOOTER */
 .footer {
-  background-color: blue;
+  background-color: #22266e;
   color: white;
   padding: 1%;
 }

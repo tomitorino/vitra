@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
       <div class="col-8">
         <h3 class="login-title">Registrate en Vitra</h3>
-        <form action="/login" method="POST">
+        <form action="/register" method="POST">
           <div class="mb-3">
             <label for="emailInput">Correo electrónico</label>
             <input type="email" class="form-control" name="username" />
@@ -23,9 +23,9 @@
     <br />
     <div class="row justify-content-center">
       <div class="col-8">
-        <button type="submit" class="btn btn-danger">
+        <a class="btn btn-danger" href="/auth/google" role="button">
           <i class="fab fa-google"></i> Registrarse con Google
-        </button>
+        </a>
       </div>
     </div>
   </div>

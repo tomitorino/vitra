@@ -11,6 +11,8 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const findOrCreate = require("mongoose-findorcreate");
 const devices = require("./devices.json");
+const { random } = require("lodash");
+const res = require("express/lib/response");
 
 const app = express();
 
@@ -38,7 +40,11 @@ const userSchema = new mongoose.Schema({
   email: String,
   password: String,
   googleId: String,
-  secret: String,
+  saved: [
+    {
+      id: String,
+    },
+  ],
 });
 
 userSchema.plugin(passportLocalMongoose);
@@ -75,7 +81,13 @@ passport.use(
 );
 
 app.get("/", function (req, res) {
-  res.render("index");
+  const imageBackground = "../img/blue_blob.jpg";
+  const image = "../img/mobiles.png";
+  res.render("index", {
+    background: imageBackground,
+    image: image,
+    user: req.user,
+  });
 });
 
 app.get(
@@ -93,11 +105,28 @@ app.get(
 );
 
 app.get("/privacy", function (req, res) {
-  res.render("privacy");
+  res.render("privacy", {
+    user: req.user,
+  });
 });
 
 app.get("/about", function (req, res) {
-  res.render("about");
+  res.render("about", {
+    user: req.user,
+  });
+});
+
+app.get("/favs", function (req, res) {
+  if (req.isAuthenticated()) {
+    const device = devices.RECORDS;
+    res.render("favs", {
+      user: req.user,
+      item: req.user.saved,
+      device: device,
+    });
+  } else {
+    res.redirect("/login");
+  }
 });
 
 app.get("/login", function (req, res) {
@@ -109,7 +138,49 @@ app.get("/register", function (req, res) {
 });
 
 app.get("/app", function (req, res) {
-  res.render("app");
+  const rn = Math.floor(Math.random() * (devices.RECORDS.length - 0)) + 0;
+  const device = devices.RECORDS[rn];
+
+  //Release year
+  const release = device.released_at.substring(0, 13);
+  const releaseYear = release.replace(/\D/g, ""); // 👉️ '123'
+
+  app.post("/fav", function (req, res) {
+    const actualDeviceId = req.body.deviceId;
+    const currentUser = req.user._id;
+    console.log(devices.RECORDS[actualDeviceId - 1].name + ": device liked.");
+    console.log(req.user.username);
+    User.updateOne(
+      { _id: currentUser },
+      { $push: { saved: { id: actualDeviceId - 1 } } },
+      function (err) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Updated successfully.");
+        }
+      }
+    );
+
+    res.redirect("/app");
+  });
+
+  app.post("/next", function (req, res) {
+    const actualDeviceId = req.body.deviceId;
+    console.log(devices.RECORDS[actualDeviceId - 1].name + ": device skipped.");
+    res.redirect("/app");
+  });
+
+  if (req.isAuthenticated()) {
+    res.render("app", { device: device, release: releaseYear });
+  } else {
+    res.redirect("/login");
+  }
+});
+
+app.get("/logout", function (req, res) {
+  req.logout();
+  res.redirect("/");
 });
 
 app.post("/register", function (req, res) {

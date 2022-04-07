@@ -1,6 +1,52 @@
-<%- include('./partials/header') %>
-<!-- -->
-<%- include('./partials/login-nav') %>
+<section class="indexSection" style="background-image: url(<%= background %>)">
+  <%- include('./partials/header') %>
+  <!-- -->
+  <% if(typeof user != 'undefined') { %>
+  <!-- -->
+  <%- include('./partials/logout-nav') %>
+  <!-- -->
+  <% } else { %>
+  <!-- -->
+  <%- include('./partials/login-nav') %>
+  <!-- -->
+  <% } %>
 
-<!-- -->
-<%- include('./partials/footer') %>
+  <!-- -->
+  <br />
+  <br />
+
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-sm-12 mainIndexText">
+        <h1 class="indexText">
+          Encontrá todo lo que buscás, en un solo lugar.
+        </h1>
+      </div>
+      <div class="col-lg-6 col-sm-12 mainIndexAppDownload">
+        <h3>Descargá la APP gratis</h3>
+        <img src="<%= image %>" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <h1>+ 10K dispositivos</h1>
+      </div>
+      <div class="col-4">
+        <h1>+ 30 marcas</h1>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid exploreNow">
+    <div class="row justify-content-center">
+      <div class="col-2">
+        <a href="/app" class="btn btn-light">Explorar ahora</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- -->
+
+  <%- include('./partials/footer') %>
+</section>
