@@ -130,6 +130,7 @@ app.get("/favs", function (req, res) {
 });
 
 app.get("/login", function (req, res) {
+  console.log("HELP");
   res.render("login");
 });
 
