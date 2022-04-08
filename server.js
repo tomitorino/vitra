@@ -124,13 +124,28 @@ app.get("/favs", function (req, res) {
       item: req.user.saved,
       device: device,
     });
+    app.post("/removeItem", function (req, res) {
+      const actualDeviceId = req.body.deviceId;
+      const currentUser = req.user._id;
+      User.updateOne(
+        { _id: currentUser },
+        { $pull: { saved: { id: actualDeviceId } } },
+        function (err) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log("Removed successfully.");
+          }
+        }
+      );
+      res.redirect("/favs");
+    });
   } else {
     res.redirect("/login");
   }
 });
 
 app.get("/login", function (req, res) {
-  console.log("HELP");
   res.render("login");
 });
 

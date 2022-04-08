@@ -80,9 +80,23 @@ body {
 }
 
 .itemCard {
-  padding: 2%;
+  padding: 5%;
   height: 100%;
   width: 100%;
+}
+
+.itemCard:hover {
+  transform: scale(105%);
+  transition: 0.2s;
+}
+
+.card-img-top {
+  max-width: 150px;
+}
+
+#deviceImg {
+  display: block;
+  margin: auto;
 }
 
 /* FOOTER */
