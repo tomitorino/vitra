@@ -145,6 +145,14 @@ app.get("/favs", function (req, res) {
   }
 });
 
+app.get("/preferences", function (req, res) {
+  if (req.isAuthenticated()) {
+    res.render("preferences");
+  } else {
+    res.redirect("/login");
+  }
+});
+
 app.get("/login", function (req, res) {
   res.render("login");
 });

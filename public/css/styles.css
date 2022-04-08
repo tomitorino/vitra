@@ -79,14 +79,8 @@ body {
   padding: 1%;
 }
 
-.itemCard {
-  padding: 5%;
-  height: 100%;
-  width: 100%;
-}
-
 .itemCard:hover {
-  transform: scale(105%);
+  transform: scale(102%);
   transition: 0.2s;
 }
 

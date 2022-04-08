@@ -17,7 +17,7 @@
     <% for(var i = 0; i < item.length; i++){ %>
 
     <div
-      class="card shadow-sm mb-4"
+      class="card shadow-sm mb-4 itemCard"
       style="width: 20rem; padding: 1%; margin: 3%"
     >
       <img
@@ -33,27 +33,35 @@
           <p class="card-text">Stats</p>
           <p class="card-text"><%= item[i].id %></p>
           <div class="row">
-            <button
-              type="button"
-              class="btn btn-danger"
-              data-bs-toggle="modal"
-              data-bs-target="#modal<%= item[i].id %>"
-              style="width: 15%"
-            >
-              X
-            </button>
-            <button type="button" class="btn btn-primary" style="width: 85%">
-              Info
-            </button>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button
+                type="button"
+                class="btn btn-danger"
+                data-bs-toggle="modal"
+                data-bs-target="#modalDelete<%= item[i].id %>"
+                style="width: 15%"
+              >
+                X
+              </button>
+              <button
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#modalInfo<%= item[i].id %>"
+                class="btn btn-outline-dark"
+                style="width: 85%"
+              >
+                Info
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Modal START -->
+    <!-- Modal Delete START -->
     <div
       class="modal"
-      id="modal<%= item[i].id %>"
+      id="modalDelete<%= item[i].id %>"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
@@ -72,7 +80,11 @@
             ></button>
           </div>
           <div class="modal-body">
-            ¿Estás seguro que querés eliminar este dispositivo de tus favoritos?
+            <p>
+              ¿Estás seguro que querés eliminar este dispositivo de tus
+              favoritos?
+            </p>
+            <small>Esta acción no se puede deshacer.</small>
           </div>
           <div class="modal-footer">
             <button
@@ -91,6 +103,53 @@
               />
               <button type="submit" class="btn btn-danger">Remover</button>
             </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal END -->
+
+    <!-- Modal Info START -->
+    <div
+      class="modal"
+      id="modalInfo<%= item[i].id %>"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              <%= device[item[i].id].name %>
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <h4>Almacenamiento</h4>
+              <p><%= device[item[i].id].storage %></p>
+              <h4>RAM</h4>
+              <p><%= device[item[i].id].ram %></p>
+              <h4>Batería</h4>
+              <p><%= device[item[i].id].battery_size %></p>
+              <h4>Sistema Operativo</h4>
+              <p><%= device[item[i].id].os %></p>
+              <h4>Test</h4>
+              <p>
+                <%= JSON.parse(device[item[1].id].specifications).Technology %>
+              </p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">
+              Ok
+            </button>
           </div>
         </div>
       </div>
