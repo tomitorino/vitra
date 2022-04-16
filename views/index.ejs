@@ -1,6 +1,6 @@
-<section class="indexSection" style="background-image: url(<%= background %>)">
+<section class="indexSection">
   <%- include('./partials/header') %>
-  <!-- -->
+  <!-- style="background-image: url(<%= background %>) -->
   <% if(typeof user != 'undefined') { %>
   <!-- -->
   <%- include('./partials/logout-nav') %>
@@ -14,38 +14,81 @@
   <!-- -->
   <br />
   <br />
+  <br />
+  <br />
 
-  <div class="container-fluid">
+  <div class="container mainContainerIndex">
     <div class="row justify-content-center">
-      <div class="col-lg-6 col-sm-12 mainIndexText">
+      <div class="col-lg-7 col-sm-12 mainIndexText">
         <h1 class="indexText">
           Encontrá todo lo que buscás, en un solo lugar.
         </h1>
       </div>
-      <div class="col-lg-6 col-sm-12 mainIndexAppDownload">
-        <h3>Descargá la APP gratis</h3>
-        <img src="<%= image %>" alt="" />
+      <div class="col-lg-5 col-sm-12 mainIndexAppDownload">
+        <img src="<%= image %>" alt="" class="indexImg" />
       </div>
     </div>
   </div>
-  <div class="container-fluid">
-    <div class="row justify-content-center">
-      <div class="col-4">
-        <h1>+ 10K dispositivos</h1>
-      </div>
-      <div class="col-4">
-        <h1>+ 30 marcas</h1>
+  <div class="container-fluid backgroundIndexInfo">
+    <div class="container indexInfo">
+      <div class="row justify-content-center">
+        <div class="col-4">
+          <div
+            class="card mb-3 shadow p-3 mb-5 bg-body indexCard"
+            style="max-width: 18rem"
+          >
+            <div class="card-body">
+              <h1 class="card-title">+10K</h1>
+            </div>
+            <div class="card-footer bg-transparent">Dispositivos</div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div
+            class="card mb-3 shadow p-3 mb-5 bg-body indexCard"
+            style="max-width: 18rem"
+          >
+            <div class="card-body">
+              <h1 class="card-title">+30</h1>
+            </div>
+            <div class="card-footer bg-transparent">Marcas</div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div
+            class="card mb-3 shadow p-3 mb-5 bg-body indexCard"
+            style="max-width: 18rem"
+          >
+            <div class="card-body">
+              <h1 class="card-title">100%</h1>
+            </div>
+            <div class="card-footer bg-transparent">Gratis</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="container-fluid exploreNow">
+  <div class="container exploreNow">
     <div class="row justify-content-center">
-      <div class="col-2">
+      <div class="col-2" style="text-align: center">
         <a href="/app" class="btn btn-light">Explorar ahora</a>
       </div>
     </div>
   </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col" style="text-align: center">
+        <button class="btn btn-dark">
+          <i class="fa-brands fa-google-play"></i> Disponible en Google Play
+        </button>
+      </div>
+    </div>
+  </div>
 
+  <br />
+  <br />
+  <br />
+  <br />
   <!-- -->
 
   <%- include('./partials/footer') %>

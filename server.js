@@ -17,6 +17,7 @@ const res = require("express/lib/response");
 const app = express();
 
 app.use(express.static("public"));
+
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -81,8 +82,8 @@ passport.use(
 );
 
 app.get("/", function (req, res) {
-  const imageBackground = "../img/blue_blob.jpg";
-  const image = "../img/mobiles.png";
+  const imageBackground = "../img/blue_material.jpg";
+  const image = "../img/motorola.png";
   res.render("index", {
     background: imageBackground,
     image: image,

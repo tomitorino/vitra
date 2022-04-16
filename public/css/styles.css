@@ -1,3 +1,11 @@
+@import url("../node_modules/font-awesome/css/font-awesome.min.css");
+@fa_path: "../node_modules/font-awesome/less";
+@import "@{fa_path}/variables.less";
+@import "@{fa_path}/mixins.less";
+@import "@{fa_path}/path.less";
+@import "@{fa_path}/core.less";
+@import "@{fa_path}/icons.less";
+
 /* --- MAIN EDITS --- */
 
 body {
@@ -5,28 +13,90 @@ body {
 }
 
 .indexSection {
-  background-position: bottom;
-  background-repeat: no-repeat;
+  background: #ffffff;
+
   /*background-size: cover; */
 }
 
-/* INDEX */
-.mainIndexText {
-  font-family: "Rubik Mono One", sans-serif;
+/* LOGIN NAV */
+
+.navbar-light .navbar-text a,
+.loginButton {
   color: white;
-  padding: 9%;
+  background-color: #21325e;
+  border: none;
+}
+
+.navbar-light .navbar-text a:hover,
+.loginButton {
+  background-color: #b7cadb;
+  color: #21325e;
+}
+
+/* INDEX */
+
+.mainContainerIndex {
+}
+
+.mainIndexText {
+  font-family: "Poppins", sans-serif;
+  color: #21325e;
+  padding: 1%;
+  vertical-align: middle;
+  display: table-cell;
+  height: auto;
+  margin: auto;
 }
 
 .mainIndexAppDownload {
   padding: 3%;
+  align-items: center;
+  display: table-cell;
+  text-align: center;
 }
 
 .indexText {
-  font-size: 56px;
+  font-size: 72px;
 }
 
 .exploreNow {
   padding: 5%;
+}
+
+.indexImg {
+  width: 100%;
+}
+
+.indexInfo {
+  text-align: center;
+}
+
+.backgroundIndexInfo {
+  background-color: #21325e;
+  padding: 3%;
+}
+
+.indexInfo .col-4 {
+  text-align: center;
+}
+
+.indexCard {
+  border-radius: 15px;
+}
+
+.indexCard:hover {
+  transform: scale(110%);
+  transition: 0.3s;
+}
+
+.indexCard .card-title {
+  font-size: 56px;
+  color: #3a3845;
+}
+
+.indexCard .card-footer {
+  color: #21325e;
+  font-weight: bold;
 }
 
 /* LOGIN FORM */
@@ -95,7 +165,7 @@ body {
 
 /* FOOTER */
 .footer {
-  background-color: #22266e;
+  background-color: #21325e;
   color: white;
   padding: 1%;
 }
