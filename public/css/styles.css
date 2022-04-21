@@ -1,11 +1,3 @@
-@import url("../node_modules/font-awesome/css/font-awesome.min.css");
-@fa_path: "../node_modules/font-awesome/less";
-@import "@{fa_path}/variables.less";
-@import "@{fa_path}/mixins.less";
-@import "@{fa_path}/path.less";
-@import "@{fa_path}/core.less";
-@import "@{fa_path}/icons.less";
-
 /* --- MAIN EDITS --- */
 
 body {
@@ -99,6 +91,15 @@ body {
   font-weight: bold;
 }
 
+.googlePlay img {
+  width: 20%;
+}
+
+.googlePlay img:hover {
+  transform: scale(102%);
+  transition: 0.1s;
+}
+
 /* LOGIN FORM */
 .login-form {
   padding: 10%;
@@ -123,16 +124,20 @@ body {
   margin-top: 3%;
   margin-bottom: 3%;
   padding: 2%;
-  border: double;
+  border: solid;
+  border-width: 1px;
+  border-radius: 20px;
+  border-color: lightgray;
 }
 
 .frame {
-  border: solid;
   padding: 2%;
 }
 
 .img-col {
-  border: double;
+  border-right: solid;
+  border-width: 1px;
+  border-color: lightgray;
   text-align: center;
   padding: 5%;
   vertical-align: middle;
@@ -140,7 +145,34 @@ body {
 }
 
 .details-col {
-  border: double;
+}
+
+.likeBtn {
+  background-color: #fd5d5d;
+  color: white;
+}
+
+.likeBtn:hover {
+  color: whitesmoke;
+}
+
+.likeBtn i:hover {
+  transform: scale(110%);
+  transition: 0.3s;
+}
+
+.skipBtn {
+  background-color: #21325e;
+  color: white;
+}
+
+.skipBtn:hover {
+  color: whitesmoke;
+}
+
+.skipBtn i:hover {
+  transform: scale(110%);
+  transition: 0.3s;
 }
 
 /* FAVS */

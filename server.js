@@ -11,8 +11,12 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const findOrCreate = require("mongoose-findorcreate");
 const devices = require("./devices.json");
+const brands = require("./brands.json");
 const { random } = require("lodash");
 const res = require("express/lib/response");
+const mongoSanitize = require("express-mongo-sanitize"); // anti-injections
+
+const { redirect, json } = require("express/lib/response");
 
 const app = express();
 
@@ -20,6 +24,8 @@ app.use(express.static("public"));
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(mongoSanitize());
 
 app.use(
   session({
@@ -46,7 +52,20 @@ const userSchema = new mongoose.Schema({
       id: String,
     },
   ],
+  preferences: [
+    {
+      brand: String,
+      release: Number,
+      storage: String,
+      ram: String,
+      battery: String,
+      cost: Number,
+      camera: String,
+    },
+  ],
 });
+
+const deviceSchema = new mongoose.Schema({});
 
 userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
@@ -84,10 +103,14 @@ passport.use(
 app.get("/", function (req, res) {
   const imageBackground = "../img/blue_material.jpg";
   const image = "../img/motorola.png";
+  const vitraLogo = "../img/VITRA_IsotipoFinal.png";
+  const googlePlay = "../img/google_play.png";
   res.render("index", {
     background: imageBackground,
     image: image,
     user: req.user,
+    googlePlay: googlePlay,
+    vitraLogo: vitraLogo,
   });
 });
 
@@ -148,7 +171,26 @@ app.get("/favs", function (req, res) {
 
 app.get("/preferences", function (req, res) {
   if (req.isAuthenticated()) {
-    res.render("preferences");
+    const brand = brands.RECORDS;
+    res.render("preferences", {
+      brand: brand,
+    });
+    app.post("/savePref", function (req, res) {
+      const prefBrand = req.body.brand;
+      const currentUser = req.user._id;
+      User.updateOne(
+        { _id: currentUser },
+        { preferences: { brand: prefBrand } },
+        function (err) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log("Updated successfully.");
+          }
+        }
+      );
+      res.redirect("/preferences");
+    });
   } else {
     res.redirect("/login");
   }
@@ -158,13 +200,49 @@ app.get("/login", function (req, res) {
   res.render("login");
 });
 
+let msg = "";
+
 app.get("/register", function (req, res) {
-  res.render("register");
+  res.render("register", { msg: msg });
+  msg = "";
 });
 
 app.get("/app", function (req, res) {
-  const rn = Math.floor(Math.random() * (devices.RECORDS.length - 0)) + 0;
-  const device = devices.RECORDS[rn];
+  msg = "";
+
+  let rn = Math.floor(Math.random() * (devices.RECORDS.length - 0)) + 0;
+  let device = devices.RECORDS[rn];
+  let sortedDevice;
+
+  //Preferences: BRAND
+
+  if (req.user.preferences[0]) {
+    const prefBrand = req.user.preferences[0].brand;
+    const prefReleaseYear = req.user.preferences[0].release;
+
+    const sortedIds = JSON.parse(JSON.stringify(devices.RECORDS)).filter(
+      function (entry) {
+        return entry.brand_id === prefBrand;
+      }
+    );
+    //.map(function (e) {
+    //  return e.id;
+    //});
+
+    console.log(sortedIds);
+
+    rn = Math.floor(Math.random() * (sortedIds.length - 0)) + 0;
+    sortedDevice = sortedIds[rn];
+
+    console.log(sortedDevice);
+  }
+
+  if (sortedDevice) {
+    device = sortedDevice;
+  }
+
+  //Battery
+  const battery = Number(device.battery_size.substring(0, 4)) / 60;
 
   //Release year
   const release = device.released_at.substring(0, 13);
@@ -197,7 +275,11 @@ app.get("/app", function (req, res) {
   });
 
   if (req.isAuthenticated()) {
-    res.render("app", { device: device, release: releaseYear });
+    res.render("app", {
+      device: device,
+      battery: battery,
+      release: releaseYear,
+    });
   } else {
     res.redirect("/login");
   }
@@ -209,20 +291,27 @@ app.get("/logout", function (req, res) {
 });
 
 app.post("/register", function (req, res) {
-  User.register(
-    { username: req.body.username },
-    req.body.password,
-    function (err, user) {
-      if (err) {
-        console.log(err);
-        res.redirect("/register");
-      } else {
-        passport.authenticate("local")(req, res, function () {
-          res.redirect("/app");
-        });
+  const password = req.body.password;
+  if (password.length < 8 || password.length > 32) {
+    console.log("Password too long or too short.");
+    msg = "La contraseña debe contener entre 8 a 32 caracteres.";
+    res.redirect("/register");
+  } else {
+    User.register(
+      { username: req.body.username },
+      req.body.password,
+      function (err, user) {
+        if (err) {
+          console.log(err);
+          res.redirect("/register");
+        } else {
+          passport.authenticate("local")(req, res, function () {
+            res.redirect("/app");
+          });
+        }
       }
-    }
-  );
+    );
+  }
 });
 
 app.post("/login", function (req, res) {

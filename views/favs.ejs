@@ -12,6 +12,12 @@
 
 <h1>Favoritos</h1>
 
+<% if(item.length < 1){ %>
+<p class="text-center" style="margin-top: 10%">
+  Aun no tenés favoritos. Agregá <a href="/app">acá.</a>
+</p>
+<% } %>
+
 <div class="container favContainer">
   <div class="row justify-content-center">
     <% for(var i = 0; i < item.length; i++){ %>
@@ -142,7 +148,10 @@
               <p><%= device[item[i].id].os %></p>
               <h4>Test</h4>
               <p>
-                <%= JSON.parse(device[item[1].id].specifications).Technology %>
+                <% if(item[1]){ %> <%=
+                JSON.parse(device[item[1].id].specifications).Technology %>
+                <!-- -->
+                <% } %>
               </p>
             </div>
           </div>
