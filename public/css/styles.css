@@ -6,9 +6,14 @@ body {
 
 .indexSection {
   background: #ffffff;
-
-  /*background-size: cover; */
 }
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*background-size: cover; */
 
 /* LOGIN NAV */
 
@@ -193,6 +198,17 @@ body {
 #deviceImg {
   display: block;
   margin: auto;
+}
+
+/* ADMIN */
+
+.editRemoveDeviceBtn {
+  width: 20px;
+  height: 20px;
+  color: white;
+  background-color: crimson;
+  border: none;
+  border-radius: 5px;
 }
 
 /* FOOTER */

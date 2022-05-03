@@ -1,0 +1,124 @@
+<%- include('./partials/header') %>
+<!-- -->
+<%- include('./partials/logout-nav') %>
+<br />
+
+<div class="container">
+  <h1>Admin Panel</h1>
+  <br />
+  <table class="center table">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">User</th>
+      <th scope="col">Actions</th>
+    </tr>
+    <% for(var i = 0; i < users.length; i++){ %>
+    <tr>
+      <td><%= users[i]._id %></td>
+      <td><%= users[i].username %></td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-toggle="modal"
+          data-bs-target="#modalEdit<%= users[i]._id %>"
+        >
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-bs-toggle="modal"
+          data-bs-target="#modalDel<%= users[i]._id %>"
+        >
+        <i class="fa fa-times" aria-hidden="true"></i>
+
+        </button>
+      </td>
+    </tr>
+
+    <!-- MODAL EDIT -->
+    <div
+      class="modal"
+      id="modalEdit<%= users[i]._id %>"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              Editar usuario
+            </h5>
+            </button>
+          </div>
+          <div class="modal-body">
+              <h3>Preferencias</h3>
+              <% for(var j = 0; j < users[i].preferences.length; j++){ %>
+                    <p>Marca: <%= users[i].preferences[j].brand %></p>
+                    <p>Año: <%= users[i].preferences[j].release %></p>
+                <% } %>
+              <h3>Favoritos</h3>
+              <% for(var k = 0; k < users[i].saved.length; k++){ %>
+                <form action="">
+                  <button class="editRemoveDeviceBtn"">-</button>
+                  <p style="display: inline-block;"><%= devices[users[i].saved[k].id].name %></p>
+              </form>
+            <% } %>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- MODAL EDIT END-->
+
+    <!-- MODAL DELETE -->
+    <div
+      class="modal"
+      id="modalDel<%= users[i]._id %>"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Eliminar usuario</h5>
+          </div>
+          <div class="modal-body">¿Estás seguro que querés eliminar a <b><%= users[i].username %></b> <br><br>
+        <small>Esta acción no se puede deshacer.</small>
+    </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <form action="/deleteUser" method="post">
+              <input type="text" value="<%= users[i]._id %>" name="selectedUser" hidden>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- MODAL DELETE END-->
+
+    <% } %>
+  </table>
+</div>
+
+<!-- -->
+<%- include('./partials/footer') %>

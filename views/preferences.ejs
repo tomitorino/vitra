@@ -12,12 +12,16 @@
     <option value="<%= brand[i].id %>"><%= brand[i].name %></option>
     <% } %>
   </select>
-  <input type="submit" />
-</form>
 
-<p>Release:</p>
-<form action="/savePref" method="post">
-  <input type="number" placeholder="2020" value="2020" min="1990" max="2023" />
+  <p>Release:</p>
+  <input
+    name="release"
+    id="release"
+    type="number"
+    placeholder="2020"
+    min="1990"
+    max="2023"
+  />
   <input type="submit" />
 </form>
 

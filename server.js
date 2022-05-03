@@ -177,10 +177,12 @@ app.get("/preferences", function (req, res) {
     });
     app.post("/savePref", function (req, res) {
       const prefBrand = req.body.brand;
+      const prefYear = req.body.release;
       const currentUser = req.user._id;
+      console.log(prefYear);
       User.updateOne(
         { _id: currentUser },
-        { preferences: { brand: prefBrand } },
+        { preferences: { brand: prefBrand, release: prefYear } },
         function (err) {
           if (err) {
             console.log(err);
@@ -214,7 +216,7 @@ app.get("/app", function (req, res) {
   let device = devices.RECORDS[rn];
   let sortedDevice;
 
-  //Preferences: BRAND
+  //PREFERENCES
 
   if (req.user.preferences[0]) {
     const prefBrand = req.user.preferences[0].brand;
@@ -222,19 +224,21 @@ app.get("/app", function (req, res) {
 
     const sortedIds = JSON.parse(JSON.stringify(devices.RECORDS)).filter(
       function (entry) {
-        return entry.brand_id === prefBrand;
+        return (
+          entry.brand_id === prefBrand &&
+          entry.released_at.includes(prefReleaseYear)
+        );
       }
     );
     //.map(function (e) {
     //  return e.id;
     //});
 
-    console.log(sortedIds);
-
     rn = Math.floor(Math.random() * (sortedIds.length - 0)) + 0;
     sortedDevice = sortedIds[rn];
 
-    console.log(sortedDevice);
+    console.log(prefBrand);
+    console.log(prefReleaseYear);
   }
 
   if (sortedDevice) {
@@ -327,6 +331,33 @@ app.post("/login", function (req, res) {
       passport.authenticate("local")(req, res, function () {
         res.redirect("/app");
       });
+    }
+  });
+});
+
+app.get("/admin", function (req, res) {
+  if (req.isAuthenticated()) {
+    if (req.user.username == "admin@test.com") {
+      User.find({}, function (err, users) {
+        const device = devices.RECORDS;
+        res.render("admin", { users: users, devices: device });
+      });
+    } else {
+      res.redirect("/");
+    }
+  } else {
+    res.redirect("/login");
+  }
+});
+
+app.post("/deleteUser", function (req, res) {
+  const userId = req.body.selectedUser;
+  console.log(userId);
+  User.deleteOne({ _id: userId }, function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/admin");
     }
   });
 });
