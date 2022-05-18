@@ -2,28 +2,37 @@
 <!-- -->
 <%- include('./partials/logout-nav') %>
 <!-- -->
+<br /><br />
+<div class="container">
+  <h1 class="sectionTitle">Preferencias</h1>
+  <hr>
 
-<h1>Preferencias</h1>
-
-<p>Brand:</p>
-<form action="/savePref" method="post">
-  <select name="brand" id="brand">
-    <% for(var i = 0; i < brand.length; i++){ %>
-    <option value="<%= brand[i].id %>"><%= brand[i].name %></option>
-    <% } %>
-  </select>
-
-  <p>Release:</p>
-  <input
-    name="release"
-    id="release"
-    type="number"
-    placeholder="2020"
-    min="1990"
-    max="2023"
-  />
-  <input type="submit" />
-</form>
-
+  
+  <form action="/savePref" method="post">
+    <label for="brand">Marca:</label>
+    <br>
+    <select name="brand" id="brand">
+      <option value="" disabled selected hidden>Seleccionar</option>
+      <% for(var i = 0; i < brand.length; i++){ %>
+      <option value="<%= brand[i].id %>"><%= brand[i].name %></option>
+      <% } %>
+    </select>
+    <br /><br />
+    <label for="release">Lanzamiento:</label>
+    <br>
+    <input
+      name="release"
+      id="release"
+      type="number"
+      placeholder="2020"
+      min="1990"
+      max="2023"
+    />
+    <br>
+    <br>
+    <button class="btn btn-success" type="submit" />Guardar</button><br>
+    <i style="font-size: 12px;">Guardá sin seleccionar nada para quitar los filtros.</i>
+  </form>
+</div>
 <!-- -->
 <%- include('./partials/footer') %>

@@ -105,12 +105,14 @@ app.get("/", function (req, res) {
   const image = "../img/motorola.png";
   const vitraLogo = "../img/VITRA_IsotipoFinal.png";
   const googlePlay = "../img/google_play.png";
+  const iphonesImg = "../img/iphone_imgs.png";
   res.render("index", {
     background: imageBackground,
     image: image,
     user: req.user,
     googlePlay: googlePlay,
     vitraLogo: vitraLogo,
+    iphonesImg: iphonesImg,
   });
 });
 
@@ -191,7 +193,7 @@ app.get("/preferences", function (req, res) {
           }
         }
       );
-      res.redirect("/preferences");
+      res.redirect("/app");
     });
   } else {
     res.redirect("/login");
@@ -210,6 +212,9 @@ app.get("/register", function (req, res) {
 });
 
 app.get("/app", function (req, res) {
+  if (!req.isAuthenticated()) {
+    res.redirect("/login");
+  }
   msg = "";
 
   let rn = Math.floor(Math.random() * (devices.RECORDS.length - 0)) + 0;
@@ -224,10 +229,16 @@ app.get("/app", function (req, res) {
 
     const sortedIds = JSON.parse(JSON.stringify(devices.RECORDS)).filter(
       function (entry) {
-        return (
-          entry.brand_id === prefBrand &&
-          entry.released_at.includes(prefReleaseYear)
-        );
+        if (prefBrand) {
+          return entry.brand_id === prefBrand;
+        }
+        if (prefReleaseYear) {
+          return entry.released_at.includes(prefReleaseYear);
+        }
+        //return (
+        //  entry.brand_id === prefBrand &&
+        //  entry.released_at.includes(prefReleaseYear)
+        //);
       }
     );
     //.map(function (e) {
@@ -348,17 +359,37 @@ app.get("/admin", function (req, res) {
   } else {
     res.redirect("/login");
   }
-});
 
-app.post("/deleteUser", function (req, res) {
-  const userId = req.body.selectedUser;
-  console.log(userId);
-  User.deleteOne({ _id: userId }, function (err) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect("/admin");
-    }
+  app.post("/deleteUser", function (req, res) {
+    const userId = req.body.selectedUser;
+    console.log(userId);
+    User.deleteOne({ _id: userId }, function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.redirect("/admin");
+      }
+    });
+  });
+
+  app.post("/removeFav", function (req, res) {
+    const itemToRemove = req.body.favId;
+    const userId = req.body.editedUser;
+
+    console.log(itemToRemove);
+    console.log(userId);
+    User.updateOne(
+      { _id: userId },
+      { $pull: { saved: { _id: itemToRemove } } },
+      function (err) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(itemToRemove + " removed.");
+        }
+      }
+    );
+    res.redirect("/admin");
   });
 });
 

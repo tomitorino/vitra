@@ -2,9 +2,10 @@
 <!-- -->
 <%- include('./partials/logout-nav') %>
 <br />
-
+<br>
 <div class="container">
-  <h1>Admin Panel</h1>
+  <h1 class="sectionTitle">Admin Panel</h1>
+  <hr>
   <br />
   <table class="center table">
     <tr>
@@ -22,6 +23,7 @@
           class="btn btn-secondary"
           data-bs-toggle="modal"
           data-bs-target="#modalEdit<%= users[i]._id %>"
+          id="editUser<%= users[i]._id %>"
         >
         <i class="fa fa-pencil" aria-hidden="true"></i>
         </button>
@@ -61,21 +63,24 @@
                 <% } %>
               <h3>Favoritos</h3>
               <% for(var k = 0; k < users[i].saved.length; k++){ %>
-                <form action="">
-                  <button class="editRemoveDeviceBtn"">-</button>
+                <form action="/removeFav" method="post">
+                  <input 
+                    type="text" 
+                    name="favId" 
+                    value="<%= users[i].saved[k]._id %>" 
+                    hidden>
+                  <input 
+                    type="text"
+                    name="editedUser"
+                    value="<%= users[i]._id %>" 
+                    hidden>
+                  <button type="submit" class="editRemoveDeviceBtn"">-</button>
                   <p style="display: inline-block;"><%= devices[users[i].saved[k].id].name %></p>
               </form>
             <% } %>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cancelar
-            </button>
-            <button type="button" class="btn btn-primary">Guardar</button>
+            <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Ok</button>
           </div>
         </div>
       </div>
@@ -115,10 +120,14 @@
       </div>
     </div>
     <!-- MODAL DELETE END-->
-
+    <script>
+      
+    </script>
     <% } %>
   </table>
 </div>
+
+
 
 <!-- -->
 <%- include('./partials/footer') %>

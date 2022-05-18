@@ -13,6 +13,10 @@ body {
   margin-right: auto;
 }
 
+.sectionTitle {
+  font-weight: 900;
+}
+
 /*background-size: cover; */
 
 /* LOGIN NAV */
@@ -54,6 +58,11 @@ body {
 
 .indexText {
   font-size: 72px;
+}
+
+.indexText2 {
+  font-size: 48px;
+  color: #21325e;
 }
 
 .exploreNow {
