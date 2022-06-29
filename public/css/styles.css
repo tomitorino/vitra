@@ -189,6 +189,14 @@ body {
   transition: 0.3s;
 }
 
+.appTitle {
+  font-weight: 900;
+}
+
+.appSubtitle {
+  font-weight: 500;
+}
+
 /* FAVS */
 
 .favItem {
@@ -207,6 +215,10 @@ body {
 #deviceImg {
   display: block;
   margin: auto;
+}
+
+.modalSubtitle {
+  font-weight: 700;
 }
 
 /* ADMIN */

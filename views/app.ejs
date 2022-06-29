@@ -15,7 +15,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-12">
-                  <h1><%= device.name %></h1>
+                  <h1 class="appTitle"><%= device.name %></h1>
                 </div>
               </div>
               <div class="row">
@@ -23,38 +23,25 @@
                   <p>Lanzamiento: <%= release %></p>
                 </div>
               </div>
+              <br />
               <div class="row">
                 <div class="col-12">
-                  <h3>Almacenamiento:</h3>
+                  <h3 class="appSubtitle">Almacenamiento</h3>
                   <p><%= device.storage %></p>
-                  <div class="progress">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      style="width: 25%"
-                    ></div>
-                  </div>
                 </div>
               </div>
               <br />
               <div class="row">
                 <div class="col-12">
-                  <h3>Memoria RAM:</h3>
+                  <h3 class="appSubtitle">Memoria RAM</h3>
                   <p><%= device.ram %></p>
-                  <div class="progress">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      style="width: 50%"
-                    ></div>
-                  </div>
                 </div>
               </div>
               <br />
               <div class="row">
                 <div class="col-12">
-                  <h3>Batería:</h3>
-                  <p><%= device.battery_size %></p>
+                  <h3 class="appSubtitle">Batería</h3>
+                  <p><%= device.battery_size + ' mAh' %></p>
                   <div class="progress">
                     <div
                       class="progress-bar"
@@ -67,8 +54,8 @@
               <br />
               <div class="row">
                 <div class="col-12">
-                  <h4>Costo:</h4>
-                  <p><%= JSON.parse(device.specifications).Price %></p>
+                  <h4 class="appSubtitle">Costo</h4>
+                  <p><%= device.specifications.Price %></p>
                 </div>
               </div>
               <br />

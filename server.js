@@ -10,7 +10,7 @@ const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const findOrCreate = require("mongoose-findorcreate");
-const devices = require("./devices.json");
+const devices = require("./csvjson.json");
 const brands = require("./brands.json");
 const { random } = require("lodash");
 const res = require("express/lib/response");
@@ -55,7 +55,8 @@ const userSchema = new mongoose.Schema({
   preferences: [
     {
       brand: String,
-      release: Number,
+      releaseFrom: Number,
+      releaseTo: Number,
       storage: String,
       ram: String,
       battery: String,
@@ -145,10 +146,16 @@ app.get("/about", function (req, res) {
 app.get("/favs", function (req, res) {
   if (req.isAuthenticated()) {
     const device = devices.RECORDS;
+    const battery_img = "../img/battery.png";
+    const ram_img = "../img/ram.png";
+    const storage_img = "../img/storage.png";
     res.render("favs", {
       user: req.user,
       item: req.user.saved,
       device: device,
+      battery_img: battery_img,
+      ram_img: ram_img,
+      storage_img: storage_img,
     });
     app.post("/removeItem", function (req, res) {
       const actualDeviceId = req.body.deviceId;
@@ -179,12 +186,18 @@ app.get("/preferences", function (req, res) {
     });
     app.post("/savePref", function (req, res) {
       const prefBrand = req.body.brand;
-      const prefYear = req.body.release;
+      const prefYearFrom = req.body.releaseFrom;
+      const prefYearTo = req.body.releaseTo;
       const currentUser = req.user._id;
-      console.log(prefYear);
       User.updateOne(
         { _id: currentUser },
-        { preferences: { brand: prefBrand, release: prefYear } },
+        {
+          preferences: {
+            brand: prefBrand,
+            releaseFrom: prefYearFrom,
+            releaseTo: prefYearTo,
+          },
+        },
         function (err) {
           if (err) {
             console.log(err);
@@ -225,31 +238,70 @@ app.get("/app", function (req, res) {
 
   if (req.user.preferences[0]) {
     const prefBrand = req.user.preferences[0].brand;
-    const prefReleaseYear = req.user.preferences[0].release;
+    const prefReleaseYearFrom = req.user.preferences[0].releaseFrom;
+    const prefReleaseYearTo = req.user.preferences[0].releaseTo;
 
-    const sortedIds = JSON.parse(JSON.stringify(devices.RECORDS)).filter(
-      function (entry) {
-        if (prefBrand) {
-          return entry.brand_id === prefBrand;
-        }
-        if (prefReleaseYear) {
-          return entry.released_at.includes(prefReleaseYear);
-        }
-        //return (
-        //  entry.brand_id === prefBrand &&
-        //  entry.released_at.includes(prefReleaseYear)
-        //);
+    var allDevices = devices.RECORDS;
+    var sortedIds = function (element) {
+      if (prefBrand && prefReleaseYearFrom && prefReleaseYearTo) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.released_at <= prefReleaseYearTo &&
+          element.brand_id == prefBrand
+        );
       }
-    );
+
+      if (prefBrand) {
+        return element.brand_id == prefBrand;
+      }
+
+      if (prefReleaseYearFrom) {
+        return element.released_at == prefReleaseYearFrom;
+      }
+
+      if (prefReleaseYearTo) {
+        return element.released_at == prefReleaseYearTo;
+      }
+    };
+
+    var filter = allDevices.filter(sortedIds);
+
+    //codigo que funcionaba pero ya no :( ------------------
+
+    //const sortedIds = devices.RECORDS.filter(function (entry) {
+    //  if (prefBrand && prefReleaseYear) {
+    //    return (
+    //      entry.brand_id === prefBrand &&
+    //      entry.released_at.includes(prefReleaseYear)
+    //    );
+    //  }
+
+    //  if (prefBrand) {
+    //    return entry.brand_id === prefBrand;
+    //  }
+    //  if (prefReleaseYear) {
+    //    return entry.released_at.prefReleaseYear;
+    //  }
+    //});
+
+    //return (
+    //  entry.brand_id === prefBrand &&
+    //  entry.released_at.includes(prefReleaseYear)
+    //);
+
     //.map(function (e) {
     //  return e.id;
     //});
 
-    rn = Math.floor(Math.random() * (sortedIds.length - 0)) + 0;
-    sortedDevice = sortedIds[rn];
+    // --------------------------------------------------------
+
+    rn = Math.floor(Math.random() * (filter.length - 0)) + 0;
+    sortedDevice = filter[rn];
+
+    console.log(filter.length);
 
     console.log(prefBrand);
-    console.log(prefReleaseYear);
+    console.log(prefReleaseYearFrom);
   }
 
   if (sortedDevice) {
@@ -257,11 +309,11 @@ app.get("/app", function (req, res) {
   }
 
   //Battery
-  const battery = Number(device.battery_size.substring(0, 4)) / 60;
+  const battery = Number(device.battery_size) / 60;
 
   //Release year
-  const release = device.released_at.substring(0, 13);
-  const releaseYear = release.replace(/\D/g, ""); // 👉️ '123'
+  const release = device.released_at;
+  const releaseYear = release;
 
   app.post("/fav", function (req, res) {
     const actualDeviceId = req.body.deviceId;

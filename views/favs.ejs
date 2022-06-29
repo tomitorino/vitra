@@ -38,9 +38,18 @@
         <div class="card-body d-flex flex-column">
           <h5 class="card-title"><%= device[item[i].id].name %></h5>
           <div class="mt-auto">
-            <p class="card-text">Stats</p>
-            <p class="card-text">Stats</p>
-            <p class="card-text"><%= item[i].id %></p>
+            <p class="card-text">
+              <img src="<%= storage_img %>" alt="" width="20px" /> <%=
+              device[item[i].id].storage %>
+            </p>
+            <p class="card-text">
+              <img src="<%= ram_img %>" alt="" width="20px" /> <%=
+              device[item[i].id].ram %>
+            </p>
+            <p class="card-text">
+              <img src="<%= battery_img %>" alt="" width="20px" />
+              <%= device[item[i].id].battery_size + ' mAh' %>
+            </p>
             <div class="row">
               <div class="btn-group" role="group" aria-label="Basic example">
                 <button
@@ -141,18 +150,76 @@
             </div>
             <div class="modal-body">
               <div class="container">
-                <h4>Almacenamiento</h4>
+                <h4 class="modalSubtitle">Almacenamiento</h4>
                 <p><%= device[item[i].id].storage %></p>
-                <h4>RAM</h4>
+                <h4 class="modalSubtitle">RAM</h4>
                 <p><%= device[item[i].id].ram %></p>
-                <h4>Batería</h4>
-                <p><%= device[item[i].id].battery_size %></p>
-                <h4>Sistema Operativo</h4>
-                <p><%= device[item[i].id].os %></p>
-                <h4>Test</h4>
+                <h4 class="modalSubtitle">Batería</h4>
+                <p><%= device[item[i].id].battery_size + ' mAh' %></p>
+                <h4 class="modalSubtitle">Procesador</h4>
+                <p><%= device[item[i].id].chipset %></p>
+                <h4 class="modalSubtitle">CPU</h4>
                 <p>
-                  <% if(item[1]){ %> <%=
-                  JSON.parse(device[item[1].id].specifications).Technology %>
+                  <% if(item[i]){ %> <%= device[item[i].id].specifications.CPU
+                  %>
+                  <!-- -->
+                  <% } %>
+                </p>
+                <h4 class="modalSubtitle">Sistema Operativo</h4>
+                <p><%= device[item[i].id].os %></p>
+                <h4 class="modalSubtitle">Dimensiones</h4>
+                <p>
+                  <% if(item[i]){ %> <%=
+                  device[item[i].id].specifications.Dimensions %>
+                  <!-- -->
+                  <% } %>
+                </p>
+                <h4 class="modalSubtitle">Peso</h4>
+                <p>
+                  <% if(item[i]){ %> <%=
+                  device[item[i].id].specifications.Weight %>
+                  <!-- -->
+                  <% } %>
+                </p>
+                <h4 class="modalSubtitle">Resolución</h4>
+                <p>
+                  <% if(item[i]){ %> <%=
+                  device[item[i].id].specifications.Resolution %>
+                  <!-- -->
+                  <% } %>
+                </p>
+                <h4 class="modalSubtitle">Bluetooth</h4>
+                <p>
+                  <% if(item[i]){ %> <%=
+                  device[item[i].id].specifications.Bluetooth %>
+                  <!-- -->
+                  <% } %>
+                </p>
+                <h4 class="modalSubtitle">Tipo de cargador</h4>
+                <p>
+                  <% if(item[i]){ %> <%= device[item[i].id].specifications.USB
+                  %>
+                  <!-- -->
+                  <% } %>
+                </p>
+                <h4 class="modalSubtitle">Tipo de carga</h4>
+                <p>
+                  <% if(item[i]){ %> <%=
+                  device[item[i].id].specifications.Charging %>
+                  <!-- -->
+                  <% } %>
+                </p>
+                <h4 class="modalSubtitle">Sensores</h4>
+                <p>
+                  <% if(item[i]){ %> <%=
+                  device[item[i].id].specifications.Sensors %>
+                  <!-- -->
+                  <% } %>
+                </p>
+                <h4 class="modalSubtitle">Disponibilidad</h4>
+                <p>
+                  <% if(item[i]){ %> <%=
+                  device[item[i].id].specifications.Status %>
                   <!-- -->
                   <% } %>
                 </p>

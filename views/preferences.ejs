@@ -21,7 +21,15 @@
     <label for="release">Lanzamiento:</label>
     <br>
     <input
-      name="release"
+      name="releaseFrom"
+      id="release"
+      type="number"
+      placeholder="2016"
+      min="1990"
+      max="2023"
+    />
+    <input
+      name="releaseTo"
       id="release"
       type="number"
       placeholder="2020"
@@ -30,6 +38,10 @@
     />
     <br>
     <br>
+    <label for="ram">RAM:</label>
+    <br>
+    <input type="number">
+    <br><br>
     <button class="btn btn-success" type="submit" />Guardar</button><br>
     <i style="font-size: 12px;">Guardá sin seleccionar nada para quitar los filtros.</i>
   </form>
