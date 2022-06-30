@@ -1,5 +1,6 @@
 1) git add .
 2) git commit -m "comment"
-3) git push heroku master
+3) git push heroku main (heroku)
+4) git push origin main (github)
 
 Heroku link: https://powerful-citadel-60140.herokuapp.com/

@@ -224,6 +224,10 @@ app.get("/register", function (req, res) {
   msg = "";
 });
 
+app.get("/comparator", function (req, res) {
+  res.render("comparator");
+});
+
 app.get("/app", function (req, res) {
   if (!req.isAuthenticated()) {
     res.redirect("/login");

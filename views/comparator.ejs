@@ -1,0 +1,57 @@
+<%- include('./partials/header') %>
+<!-- -->
+<% if(typeof user != 'undefined') { %>
+<!-- -->
+<%- include('./partials/logout-nav') %>
+<!-- -->
+<% } else { %>
+<!-- -->
+<%- include('./partials/login-nav') %>
+<!-- -->
+<% } %>
+
+<br /><br />
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <h1 class="sectionTitle">Comparador</h1>
+      <div class="container">
+        <div class="row justify-content-around">
+          <div class="col-3">
+            <h3>Marca</h3>
+            <input type="search" id="myoptions" list="deviceList" />
+            <br />
+            <datalist id="deviceList"> </datalist>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<script>
+  $.getJSON(
+    "https://raw.githubusercontent.com/tomitorino/vitra/main/csvjson.json",
+    function (data) {
+      const devices = data.RECORDS;
+
+      var url, deviceOption;
+      url =
+        "https://raw.githubusercontent.com/tomitorino/vitra/main/csvjson.json";
+
+      $.getJSON(url, function (data) {
+        //populate the cars datalist
+        $(data.RECORDS).each(function () {
+          deviceOption =
+            '<option value="' + this.name + '">' + this.id + "</option>";
+          $("#deviceList").append(deviceOption);
+        });
+      });
+    }
+  );
+</script>
+
+<%- include('./partials/footer') %>
