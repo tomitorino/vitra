@@ -16,15 +16,46 @@
   <div class="row justify-content-center">
     <div class="col-12">
       <h1 class="sectionTitle">Comparador</h1>
+      <br><br><br>
       <div class="container">
         <div class="row justify-content-around">
-          <div class="col-3">
-            <h3>Marca</h3>
-            <input type="search" id="myoptions" list="deviceList" />
+          <div class="col-3 comparatorCard shadow-lg">
+            <small>Buscar</small>
+            <div class="input-group mb-3">
+              <input
+                class="form-control"
+                type="search"
+                id="myoptions"
+                list="deviceList"
+                placeholder="Nokia 3210"
+              />
+              <button class="btn btn-dark" onclick="searchData1()">🔎</button>
+              <datalist id="deviceList"></datalist>
+            </div>
+            <br>
+            <img id="device1img" src="https://fdn2.gsmarena.com/vv/bigpic/no3210b.gif"></img>
+            <br><br>
+            <p id="device1storage">Seleccionar</p>
+            <hr>
+            <p id="device1ram">Seleccionar</p>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="1000"></div>
+            </div>
+            <hr>
+            <p id="device1battery">Seleccionar</p>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
             <br />
-            <datalist id="deviceList"> </datalist>
+            <p id="device1camera">Seleccionar</p>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <br />
+            <p id="device1price">Seleccionar</p>
           </div>
         </div>
+        <br><br><br><br><br>
       </div>
     </div>
   </div>
@@ -33,25 +64,55 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 <script>
+  // BUSCADOR
+  function searchData1() {
+    let selectedDevice1 = $("#myoptions").val();
+    console.log(selectedDevice1);
+    $("#title").html(selectedDevice1);
+
+    $.getJSON(
+      "https://raw.githubusercontent.com/tomitorino/vitra_devices/main/csvjson.json",
+      function (data) {
+        var items1 = data.RECORDS;
+        items1 = data.RECORDS.filter(function (obj) {
+          return obj.name === selectedDevice1;
+        });
+        console.log(items1[0].id);
+        $("#device1img").attr("src",items1[0].picture)
+        $("#device1storage").html(items1[0].storage)
+        $("#device1ram").html(items1[0].ram)
+        $("#device1battery").html(items1[0].battery_size + " mAh")
+        $("#device1camera").html(items1[0].camera_pixels)
+        $("#device1price").html(items1[0].specifications.Price)
+      }
+    );
+  }
+
+  // ------- DATALIST ------------
   $.getJSON(
-    "https://raw.githubusercontent.com/tomitorino/vitra/main/csvjson.json",
+    "https://raw.githubusercontent.com/tomitorino/vitra_devices/main/csvjson.json",
     function (data) {
       const devices = data.RECORDS;
-
       var url, deviceOption;
       url =
-        "https://raw.githubusercontent.com/tomitorino/vitra/main/csvjson.json";
+        "https://raw.githubusercontent.com/tomitorino/vitra_devices/main/csvjson.json";
 
       $.getJSON(url, function (data) {
         //populate the cars datalist
         $(data.RECORDS).each(function () {
           deviceOption =
-            '<option value="' + this.name + '">' + this.id + "</option>";
+            '<option value="' +
+            this.name +
+            '">' +
+            this.released_at +
+            "</option>";
           $("#deviceList").append(deviceOption);
         });
       });
     }
   );
+
+  // -------- DATALIST END --------------
 </script>
 
 <%- include('./partials/footer') %>

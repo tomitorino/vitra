@@ -238,3 +238,47 @@ body {
   color: white;
   padding: 1%;
 }
+
+/* COMPARATOR */
+
+.comparatorCard {
+  border: solid;
+  border-color: #21325e;
+  border-radius: 10px;
+  border-width: 2px;
+  padding: 2%;
+}
+
+@media (max-width: 1024px) {
+  .indexText {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 768px) {
+  .indexText {
+    font-size: 42px;
+  }
+
+  .indexCard .card-title {
+    font-size: 24px;
+  }
+
+  .indexCard .card-footer {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 425px) {
+  .indexText {
+    font-size: 36px;
+  }
+
+  .indexCard .card-title {
+    font-size: 18px;
+  }
+
+  .indexCard .card-footer {
+    font-size: 10px;
+  }
+}
