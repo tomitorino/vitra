@@ -114,6 +114,10 @@ body {
   transition: 0.1s;
 }
 
+.iphonesImg {
+  max-width: 500px;
+}
+
 /* LOGIN FORM */
 .login-form {
   padding: 10%;
@@ -253,6 +257,10 @@ body {
   .indexText {
     font-size: 56px;
   }
+
+  .iphonesImg {
+    width: 400px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -267,9 +275,17 @@ body {
   .indexCard .card-footer {
     font-size: 14px;
   }
+
+  .iphonesImg {
+    width: 250px;
+  }
 }
 
 @media (max-width: 425px) {
+  body {
+    text-align: center;
+  }
+
   .indexText {
     font-size: 36px;
   }
@@ -280,5 +296,13 @@ body {
 
   .indexCard .card-footer {
     font-size: 10px;
+  }
+
+  .indexText2 {
+    font-size: 24px;
+  }
+
+  .googlePlay img {
+    width: 80%;
   }
 }
