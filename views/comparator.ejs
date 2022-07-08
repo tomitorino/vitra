@@ -10,7 +10,7 @@
 <!-- -->
 <% } %>
 
-<br /><br />
+<br /><br /><br>
 
 <div class="container">
   <div class="row justify-content-center">
@@ -18,14 +18,14 @@
       <h1 class="sectionTitle">Comparador</h1>
       <br><br><br>
       <div class="container">
-        <div class="row justify-content-around">
-          <div class="col-3 comparatorCard shadow-lg">
+        <div class="row justify-content-around comparatorRow">
+          <div class="col-lg-4 col-md-6 col-sm-6 comparatorCard">
             <small>Buscar</small>
             <div class="input-group mb-3">
               <input
                 class="form-control"
                 type="search"
-                id="myoptions"
+                id="myoptions1"
                 list="deviceList"
                 placeholder="Nokia 3210"
               />
@@ -35,24 +35,139 @@
             <br>
             <img id="device1img" src="https://fdn2.gsmarena.com/vv/bigpic/no3210b.gif"></img>
             <br><br>
-            <p id="device1storage">Seleccionar</p>
+            <p>
+              <img src="<%= storage_img %>" alt="" width="20px" />
+              <span id="device1storage">Seleccionar</span>
+            </p>
             <hr>
-            <p id="device1ram">Seleccionar</p>
+            <p>
+              <img src="<%= ram_img %>" alt="" width="20px" />
+              <span id="device1ram">Seleccionar</span>
+            </p>
             <div class="progress">
-              <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="1000"></div>
+              <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="1000" id="device1ramValue"></div>
             </div>
             <hr>
-            <p id="device1battery">Seleccionar</p>
+            <p>
+            <img src="<%= battery_img %>" alt="" width="20px" />
+            <span id="device1battery">Seleccionar</span>
+            </p>
             <div class="progress">
-              <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" id="device1batteryValue"></div>
             </div>
             <br />
-            <p id="device1camera">Seleccionar</p>
+            <p>
+            <img src="<%= camera_img %>" alt="" width="20px" />
+            <span id="device1camera">Seleccionar</span>
+            </p>
             <div class="progress">
-              <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" id="device1cameraValue"></div>
             </div>
             <br />
-            <p id="device1price">Seleccionar</p>
+            <p>
+              <img src="<%= price_img %>" alt="" width="20px" />
+            <span id="device1price">Seleccionar</span>
+          </p>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6 comparatorCard">
+            <small>Buscar</small>
+            <div class="input-group mb-3">
+              <input
+                class="form-control"
+                type="search"
+                id="myoptions2"
+                list="deviceList"
+                placeholder="Nokia 3210"
+              />
+              <button class="btn btn-dark" onclick="searchData2()">🔎</button>
+              <datalist id="deviceList"></datalist>
+            </div>
+            <br>
+            <img id="device2img" src="https://fdn2.gsmarena.com/vv/bigpic/no3210b.gif"></img>
+            <br><br>
+            <p>
+              <img src="<%= storage_img %>" alt="" width="20px" />
+              <span id="device2storage">Seleccionar</span>
+            </p>
+            <hr>
+            <p>
+              <img src="<%= ram_img %>" alt="" width="20px" />
+              <span id="device2ram">Seleccionar</span>
+            </p>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="1000" id="device2ramValue"></div>
+            </div>
+            <hr>
+            <p>
+            <img src="<%= battery_img %>" alt="" width="20px" />
+            <span id="device2battery">Seleccionar</span>
+            </p>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" id="device2batteryValue"></div>
+            </div>
+            <br />
+            <p>
+            <img src="<%= camera_img %>" alt="" width="20px" />
+            <span id="device2camera">Seleccionar</span>
+            </p>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" id="device2cameraValue"></div>
+            </div>
+            <br />
+            <p>
+              <img src="<%= price_img %>" alt="" width="20px" />
+            <span id="device2price">Seleccionar</span>
+          </p>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6 comparatorCard">
+            <small>Buscar</small>
+            <div class="input-group mb-3">
+              <input
+                class="form-control"
+                type="search"
+                id="myoptions3"
+                list="deviceList"
+                placeholder="Nokia 3210"
+              />
+              <button class="btn btn-dark" onclick="searchData3()">🔎</button>
+              <datalist id="deviceList"></datalist>
+            </div>
+            <br>
+            <img id="device3img" src="https://fdn2.gsmarena.com/vv/bigpic/no3210b.gif"></img>
+            <br><br>
+            <p>
+              <img src="<%= storage_img %>" alt="" width="20px" />
+              <span id="device3storage">Seleccionar</span>
+            </p>
+            <hr>
+            <p>
+              <img src="<%= ram_img %>" alt="" width="20px" />
+              <span id="device3ram">Seleccionar</span>
+            </p>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="1000" id="device3ramValue"></div>
+            </div>
+            <hr>
+            <p>
+            <img src="<%= battery_img %>" alt="" width="20px" />
+            <span id="device3battery">Seleccionar</span>
+            </p>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" id="device3batteryValue"></div>
+            </div>
+            <br />
+            <p>
+            <img src="<%= camera_img %>" alt="" width="20px" />
+            <span id="device3camera">Seleccionar</span>
+            </p>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" id="device3cameraValue"></div>
+            </div>
+            <br />
+            <p>
+              <img src="<%= price_img %>" alt="" width="20px" />
+            <span id="device3price">Seleccionar</span>
+          </p>
           </div>
         </div>
         <br><br><br><br><br>
@@ -66,7 +181,7 @@
 <script>
   // BUSCADOR
   function searchData1() {
-    let selectedDevice1 = $("#myoptions").val();
+    let selectedDevice1 = $("#myoptions1").val();
     console.log(selectedDevice1);
     $("#title").html(selectedDevice1);
 
@@ -84,6 +199,103 @@
         $("#device1battery").html(items1[0].battery_size + " mAh")
         $("#device1camera").html(items1[0].camera_pixels)
         $("#device1price").html(items1[0].specifications.Price)
+
+        let device1ramValue = $("#device1ram").html()
+        device1ramValue = (((Number(device1ramValue.substring(0, device1ramValue.length -3)) * 100 ) / 8192)).toString() + "%"
+
+        $("#device1ramValue").css("width", device1ramValue)
+
+        let device1batteryValue = $("#device1battery").html()
+        device1batteryValue = (((Number(device1batteryValue.substring(0, device1batteryValue.length -4)) * 100 ) / 8192)).toString() + "%"
+
+  
+        $("#device1batteryValue").css("width", device1batteryValue)
+        
+        let device1cameraValue = $("#device1camera").html()
+        device1cameraValue = (((Number(device1cameraValue.substring(0, device1cameraValue.length -3)) * 100 ) / 108)).toString() + "%"
+
+        $("#device1cameraValue").css("width", device1cameraValue)
+
+      }
+    );
+  }
+
+  function searchData2() {
+    let selectedDevice2 = $("#myoptions2").val();
+    console.log(selectedDevice2);
+    $("#title").html(selectedDevice2);
+
+    $.getJSON(
+      "https://raw.githubusercontent.com/tomitorino/vitra_devices/main/csvjson.json",
+      function (data) {
+        var items2 = data.RECORDS;
+        items2 = data.RECORDS.filter(function (obj) {
+          return obj.name === selectedDevice2;
+        });
+        console.log(items2[0].id);
+        $("#device2img").attr("src",items2[0].picture)
+        $("#device2storage").html(items2[0].storage)
+        $("#device2ram").html(items2[0].ram)
+        $("#device2battery").html(items2[0].battery_size + " mAh")
+        $("#device2camera").html(items2[0].camera_pixels)
+        $("#device2price").html(items2[0].specifications.Price)
+
+        let device2ramValue = $("#device2ram").html()
+        device2ramValue = (((Number(device2ramValue.substring(0, device2ramValue.length -3)) * 100 ) / 8192)).toString() + "%"
+
+        $("#device2ramValue").css("width", device2ramValue)
+
+        let device2batteryValue = $("#device2battery").html()
+        device2batteryValue = (((Number(device2batteryValue.substring(0, device2batteryValue.length -4)) * 100 ) / 8192)).toString() + "%"
+
+  
+        $("#device2batteryValue").css("width", device2batteryValue)
+        
+        let device2cameraValue = $("#device2camera").html()
+        device2cameraValue = (((Number(device2cameraValue.substring(0, device2cameraValue.length -3)) * 100 ) / 108)).toString() + "%"
+
+        $("#device2cameraValue").css("width", device2cameraValue)
+
+      }
+    );
+  }
+
+  function searchData3() {
+    let selectedDevice3 = $("#myoptions3").val();
+    console.log(selectedDevice3);
+    $("#title").html(selectedDevice3);
+
+    $.getJSON(
+      "https://raw.githubusercontent.com/tomitorino/vitra_devices/main/csvjson.json",
+      function (data) {
+        var items3 = data.RECORDS;
+        items3 = data.RECORDS.filter(function (obj) {
+          return obj.name === selectedDevice3;
+        });
+        console.log(items3[0].id);
+        $("#device3img").attr("src",items3[0].picture)
+        $("#device3storage").html(items3[0].storage)
+        $("#device3ram").html(items3[0].ram)
+        $("#device3battery").html(items3[0].battery_size + " mAh")
+        $("#device3camera").html(items3[0].camera_pixels)
+        $("#device3price").html(items3[0].specifications.Price)
+
+        let device3ramValue = $("#device3ram").html()
+        device3ramValue = (((Number(device3ramValue.substring(0, device3ramValue.length -3)) * 100 ) / 8192)).toString() + "%"
+
+        $("#device3ramValue").css("width", device3ramValue)
+
+        let device3batteryValue = $("#device3battery").html()
+        device3batteryValue = (((Number(device3batteryValue.substring(0, device3batteryValue.length -4)) * 100 ) / 8192)).toString() + "%"
+
+  
+        $("#device3batteryValue").css("width", device3batteryValue)
+        
+        let device3cameraValue = $("#device3camera").html()
+        device3cameraValue = (((Number(device3cameraValue.substring(0, device3cameraValue.length -3)) * 100 ) / 108)).toString() + "%"
+
+        $("#device3cameraValue").css("width", device3cameraValue)
+
       }
     );
   }

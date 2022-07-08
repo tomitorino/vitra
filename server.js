@@ -225,7 +225,18 @@ app.get("/register", function (req, res) {
 });
 
 app.get("/comparator", function (req, res) {
-  res.render("comparator");
+  const battery_img = "../img/battery.png";
+  const ram_img = "../img/ram.png";
+  const storage_img = "../img/storage.png";
+  const camera_img = "../img/camera.png";
+  const price_img = "../img/price.png";
+  res.render("comparator", {
+    battery_img: battery_img,
+    ram_img: ram_img,
+    storage_img: storage_img,
+    camera_img: camera_img,
+    price_img: price_img,
+  });
 });
 
 app.get("/app", function (req, res) {

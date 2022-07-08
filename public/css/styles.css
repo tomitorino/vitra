@@ -246,7 +246,7 @@ body {
 /* COMPARATOR */
 
 .comparatorCard {
-  border: solid;
+  border: none;
   border-color: #21325e;
   border-radius: 10px;
   border-width: 2px;
