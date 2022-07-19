@@ -113,6 +113,13 @@ app.get("/", function (req, res) {
   const compare = "../img/compare.png";
   const isophone = "../img/isophone.png";
   const laptop = "../img/laptop.png";
+  const logo1 = "../img/samsung.png";
+  const logo2 = "../img/heroku.png";
+  const logo3 = "../img/udemy.png";
+  const logo4 = "../img/fravega.png";
+  const logo5 = "../img/mercadolibre.png";
+  const logo6 = "../img/musimundo.png";
+  const logo7 = "../img/logitech.png";
   res.render("index", {
     background: imageBackground,
     image: monitorTarget,
@@ -126,6 +133,13 @@ app.get("/", function (req, res) {
     compare: compare,
     isophone: isophone,
     laptop: laptop,
+    logo1: logo1,
+    logo2: logo2,
+    logo3: logo3,
+    logo4: logo4,
+    logo5: logo5,
+    logo6: logo6,
+    logo7: logo7,
   });
 });
 
