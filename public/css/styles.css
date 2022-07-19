@@ -58,15 +58,12 @@ body {
 
 .indexText {
   font-size: 72px;
+  font-weight: 900;
 }
 
 .indexText2 {
   font-size: 48px;
   color: #21325e;
-}
-
-.exploreNow {
-  padding: 5%;
 }
 
 .indexImg {
@@ -116,6 +113,104 @@ body {
 
 .iphonesImg {
   max-width: 500px;
+}
+
+.n1img,
+.n2img {
+  vertical-align: middle;
+}
+
+.comparator-section {
+  padding: 5%;
+}
+
+.bolder-text {
+  font-weight: bold;
+}
+
+.left-aligned {
+  text-align: left;
+}
+
+.info-section {
+  background-color: #21325e;
+  color: white;
+  padding: 4%;
+}
+
+.preferences-section {
+  background-color: #21325e;
+  color: white;
+  padding: 4%;
+}
+
+.partners-section {
+  padding: 4%;
+}
+
+.mobile-section {
+  background-color: #21325e;
+  color: white;
+  padding: 4%;
+}
+
+.stores {
+  align-items: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.big-bold-text {
+  font-size: 54px;
+  font-weight: 900;
+}
+
+.like-red {
+  color: #fd5d5d;
+}
+
+.vitra-orange {
+  color: #ff7a00;
+}
+
+.vitra-blue {
+  color: #21325e;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.like-red-button {
+  background-color: #fd5d5d;
+  border: none;
+  border-radius: 5px;
+  width: 50%;
+  color: white;
+  font-size: 36px;
+  font-weight: 900;
+}
+
+.like-red-button:hover {
+  background-color: #e65050;
+}
+
+.like-red-button:active {
+  transform: translateY(3px);
+  transition: 0.1s;
+}
+
+.blue-button {
+  background-color: #21325e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 50%;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 1%;
 }
 
 /* LOGIN FORM */

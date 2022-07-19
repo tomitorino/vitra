@@ -103,17 +103,29 @@ passport.use(
 
 app.get("/", function (req, res) {
   const imageBackground = "../img/blue_material.jpg";
-  const image = "../img/motorola.png";
+  const monitorTarget = "../img/monitortarget.png";
   const vitraLogo = "../img/VITRA_IsotipoFinal.png";
   const googlePlay = "../img/google_play.png";
+  const appstore = "../img/appstore.png";
   const iphonesImg = "../img/iphone_imgs.png";
+  const n1 = "../img/n1.png";
+  const n2 = "../img/n2.png";
+  const compare = "../img/compare.png";
+  const isophone = "../img/isophone.png";
+  const laptop = "../img/laptop.png";
   res.render("index", {
     background: imageBackground,
-    image: image,
+    image: monitorTarget,
     user: req.user,
     googlePlay: googlePlay,
+    appstore: appstore,
     vitraLogo: vitraLogo,
     iphonesImg: iphonesImg,
+    n1: n1,
+    n2: n2,
+    compare: compare,
+    isophone: isophone,
+    laptop: laptop,
   });
 });
 

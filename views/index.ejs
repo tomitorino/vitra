@@ -21,73 +21,144 @@
   <div class="container mainContainerIndex">
     <div class="row justify-content-center">
       <div class="col-lg-7 col-md-6 col-sm-4 mainIndexText">
-        <h1 class="indexText">
-          Encontrá el dispositivo que más se adapta a vos.
-        </h1>
+        <h1 class="indexText">Te ayudamos a decidir qué celu elegir.</h1>
+        <br />
+        <button class="btn btn-dark">¡Explorar ahora!</button>
       </div>
       <div class="col-lg-5 col-md-6 col-sm-8 mainIndexAppDownload">
         <img src="<%= image %>" alt="" class="indexImg" />
       </div>
     </div>
   </div>
-  <div class="container-fluid backgroundIndexInfo">
-    <div class="container indexInfo">
-      <div class="row justify-content-center">
-        <div class="col-md-4 col-sm-12">
-          <div class="card mb-3 shadow p-3 bg-body indexCard">
-            <div class="card-body">
-              <h1 class="card-title">+10K</h1>
+  <section class="info-section">
+    <div class="container-fluid">
+      <div class="container indexInfo">
+        <div class="row justify-content-center">
+          <div class="col-md-4 col-sm-12">
+            <div class="card mb-3 shadow p-3 bg-body indexCard">
+              <div class="card-body">
+                <h1 class="card-title">+10K</h1>
+              </div>
+              <div class="card-footer bg-transparent">Dispositivos</div>
             </div>
-            <div class="card-footer bg-transparent">Dispositivos</div>
           </div>
-        </div>
-        <div class="col-md-4 col-sm-12">
-          <div class="card mb-3 shadow p-3 bg-body indexCard">
-            <div class="card-body">
-              <h1 class="card-title">+100</h1>
+          <div class="col-md-4 col-sm-12">
+            <div class="card mb-3 shadow p-3 bg-body indexCard">
+              <div class="card-body">
+                <h1 class="card-title">+100</h1>
+              </div>
+              <div class="card-footer bg-transparent">Marcas</div>
             </div>
-            <div class="card-footer bg-transparent">Marcas</div>
           </div>
-        </div>
-        <div class="col-md-4 col-sm-12">
-          <div class="card mb-3 shadow p-3 bg-body indexCard">
-            <div class="card-body">
-              <h1 class="card-title">100%</h1>
+          <div class="col-md-4 col-sm-12">
+            <div class="card mb-3 shadow p-3 bg-body indexCard">
+              <div class="card-body">
+                <h1 class="card-title">100%</h1>
+              </div>
+              <div class="card-footer bg-transparent">Gratis</div>
             </div>
-            <div class="card-footer bg-transparent">Gratis</div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="container exploreNow">
-    <div class="row justify-content-center">
-      <div class="col-lg-6 col-md-5 col-sm-12">
-        <img class="iphonesImg" src="<%= iphonesImg %>" alt="" />
+  </section>
+  <section class="comparator-section">
+    <div class="container">
+      <div class="row justify-content-center align-center">
+        <div class="col-1">
+          <img src="<%= n1 %>" alt="" width="64px" />
+        </div>
+        <div class="col-4">
+          <span class="bolder-text"
+            >Buscá el celular, tablet o smartwatch que quieras.</span
+          >
+        </div>
       </div>
-      <div class="col-lg-6 col-md-7 col-sm-12">
-        <h1 class="indexText2">
-          Descubrí la variedad de opciones que tenemos para mostrarte.
-        </h1>
-        <br />
-        <a href="/app" class="btn btn-dark">¡Explorar ahora!</a>
+      <br />
+      <br />
+      <div class="row justify-content-center align-center">
+        <div class="col-1">
+          <img src="<%= n2 %>" alt="" width="64px" />
+        </div>
+        <div class="col-4">
+          <span class="bolder-text"
+            >Comparalo entre miles de otras opciones que te ofrece VITRA y elegí
+            lo que más se adapte a vos.</span
+          >
+        </div>
+      </div>
+      <br /><br /><br /><br />
+      <div class="row justify-content-center align-center">
+        <div class="col-5">
+          <img src="<%= compare %>" alt="" width="70%" />
+        </div>
+        <div class="col-5">
+          <h2 class="big-bold-text">
+            Compará entre más de
+            <span class="vitra-orange">10 mil</span> dispositivos.
+          </h2>
+          <br />
+          <button class="blue-button">Ir al comparador</button>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col" style="text-align: center">
-        <a href="#" class="googlePlay">
-          <img
-            class="googlePlayImg"
-            src="<%= googlePlay %>"
-            alt="Google Play"
-          />
-        </a>
+  </section>
+  <section class="preferences-section">
+    <div class="container-fluid">
+      <div class="row justify-content-center align-center">
+        <div class="col-4">
+          <h2 class="big-bold-text">
+            ¿No sabés que opciones hay? Descubrí en base a tus
+            <span class="like-red">preferencias</span>.
+          </h2>
+          <br />
+          <button class="like-red-button">¡A ver!</button>
+        </div>
+        <div class="col-4">
+          <img src="<%= isophone %>" alt="" />
+        </div>
       </div>
     </div>
-  </div>
-
+  </section>
+  <section class="partners-section">
+    <div class="container">
+      <div class="row justify-content-center align-center">
+        <div class="col-4">
+          <img src="<%= laptop %>" alt="" width="90%"/>
+        </div>
+        <div class="col-8">
+          <h2 class="big-bold-text text-right">
+            ¿Con quiénes trabajamos? </h2>
+            <h2 class="big-bold-text text-right">Conocé algunas de las <span class="vitra-blue">marcas que confían</span> en nosotros.</h2>
+          </h2>
+        </div>
+      </div>
+      <br><br><br><br><br>
+      <div
+        class="container"
+        style="background-color: red; width: 800px; height: 200px"
+      >
+        MARCAS
+      </div>
+    </div>
+  </section>
+  <section class="mobile-section">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col">
+          <h2>Disfrutá de VITRA también en tu celular.</h2>
+        </div>
+      </div>
+      <div class="row justify-content-center stores">
+        <div class="col-3">
+          <img src="<%= googlePlay %>" alt="" width="340px" />
+        </div>
+        <div class="col-3">
+          <img src="<%= appstore %>" alt="" width="300px" />
+        </div>
+      </div>
+    </div>
+  </section>
   <br />
   <br />
   <br />
@@ -96,3 +167,5 @@
 
   <%- include('./partials/footer') %>
 </section>
+
+646x250
