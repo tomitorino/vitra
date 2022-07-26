@@ -21,6 +21,7 @@
         <div class="row justify-content-around comparatorRow">
           <div class="col-lg-4 col-md-6 col-sm-6 comparatorCard">
             <small>Buscar</small>
+            <button onclick="clearSearch1()" id="cross1" class="badge rounded-pill text-bg-danger myBadge" >Limpiar búsqueda</button>
             <div class="input-group mb-3">
               <input
                 class="form-control"
@@ -33,6 +34,7 @@
               <datalist id="deviceList"></datalist>
             </div>
             <br>
+            <div id="pop-card1" class="">
             <img id="device1img" src="https://fdn2.gsmarena.com/vv/bigpic/no3210b.gif"></img>
             <br><br>
             <p>
@@ -68,9 +70,11 @@
               <img src="<%= price_img %>" alt="" width="20px" />
             <span id="device1price">Seleccionar</span>
           </p>
+        </div>
           </div>
           <div class="col-lg-4 col-md-6 col-sm-6 comparatorCard">
             <small>Buscar</small>
+            <button onclick="clearSearch2()" id="cross2" class="badge rounded-pill text-bg-danger myBadge" >Limpiar búsqueda</button>
             <div class="input-group mb-3">
               <input
                 class="form-control"
@@ -83,6 +87,7 @@
               <datalist id="deviceList"></datalist>
             </div>
             <br>
+            <div id="pop-card2" class="">
             <img id="device2img" src="https://fdn2.gsmarena.com/vv/bigpic/no3210b.gif"></img>
             <br><br>
             <p>
@@ -118,9 +123,11 @@
               <img src="<%= price_img %>" alt="" width="20px" />
             <span id="device2price">Seleccionar</span>
           </p>
+        </div>
           </div>
           <div class="col-lg-4 col-md-6 col-sm-6 comparatorCard">
             <small>Buscar</small>
+            <button onclick="clearSearch3()" id="cross3" class="badge rounded-pill text-bg-danger myBadge" >Limpiar búsqueda</button>
             <div class="input-group mb-3">
               <input
                 class="form-control"
@@ -133,6 +140,7 @@
               <datalist id="deviceList"></datalist>
             </div>
             <br>
+            <div id="pop-card3" class="">
             <img id="device3img" src="https://fdn2.gsmarena.com/vv/bigpic/no3210b.gif"></img>
             <br><br>
             <p>
@@ -168,6 +176,7 @@
               <img src="<%= price_img %>" alt="" width="20px" />
             <span id="device3price">Seleccionar</span>
           </p>
+        </div>
           </div>
         </div>
         <br><br><br><br><br>
@@ -180,8 +189,45 @@
 
 <script>
   // BUSCADOR
+
+  let popCard1 = document.getElementById("pop-card1")
+  let popCard2 = document.getElementById("pop-card2")
+  let popCard3 = document.getElementById("pop-card3")
+
+  let cross1 = document.getElementById("cross1")
+  let cross2 = document.getElementById("cross2")
+  let cross3 = document.getElementById("cross3")
+
+  searchData1()
+  searchData2()
+  searchData3()
+
+  function clearSearch1(){
+    document.getElementById("myoptions1").value = ''
+    searchData1();
+  }
+
+  function clearSearch2(){
+    document.getElementById("myoptions2").value = ''
+    searchData2();
+  }
+
+  function clearSearch3(){
+    document.getElementById("myoptions3").value = ''
+    searchData3();
+  }
+
+
+
   function searchData1() {
     let selectedDevice1 = $("#myoptions1").val();
+    if(!selectedDevice1){
+      popCard1.classList.add("hidden")
+      cross1.classList.add("hidden")
+    }else{
+      popCard1.classList.remove("hidden")
+      cross1.classList.remove("hidden")
+    }
     console.log(selectedDevice1);
     $("#title").html(selectedDevice1);
 
@@ -222,6 +268,13 @@
 
   function searchData2() {
     let selectedDevice2 = $("#myoptions2").val();
+    if(!selectedDevice2){
+      popCard2.classList.add("hidden")
+      cross2.classList.add("hidden")
+    }else{
+      popCard2.classList.remove("hidden")
+      cross2.classList.remove("hidden")
+    }
     console.log(selectedDevice2);
     $("#title").html(selectedDevice2);
 
@@ -262,6 +315,13 @@
 
   function searchData3() {
     let selectedDevice3 = $("#myoptions3").val();
+    if(!selectedDevice3){
+      popCard3.classList.add("hidden")
+      cross3.classList.add("hidden")
+    }else{
+      popCard3.classList.remove("hidden")
+      cross3.classList.remove("hidden")
+    }
     console.log(selectedDevice3);
     $("#title").html(selectedDevice3);
 
