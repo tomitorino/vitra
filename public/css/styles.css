@@ -213,6 +213,15 @@ body {
   padding: 1%;
 }
 
+.blue-button:hover {
+  background-color: #2a3f75;
+}
+
+.blue-button:active {
+  transform: translateY(3px);
+  transition: 0.1s;
+}
+
 /* LOGIN FORM */
 .login-form {
   padding: 10%;
@@ -348,6 +357,15 @@ body {
   padding: 2%;
 }
 
+/* Mobile Banners */
+.mobileBanner1 {
+  width: 115%;
+}
+
+.mobileBanner2 {
+  width: 100%;
+}
+
 @media (max-width: 1024px) {
   .indexText {
     font-size: 56px;
@@ -355,6 +373,14 @@ body {
 
   .iphonesImg {
     width: 400px;
+  }
+
+  .indexTextPref {
+    font-size: 38px;
+  }
+
+  .like-red-button {
+    font-size: 24px;
   }
 }
 
@@ -397,7 +423,7 @@ body {
     font-size: 24px;
   }
 
-  .googlePlay img {
-    width: 80%;
+  .mobileBanner1 {
+    width: 100%;
   }
 }
