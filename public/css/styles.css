@@ -403,6 +403,10 @@ body {
 }
 
 @media (max-width: 768px) {
+  body {
+    text-align: center;
+  }
+
   .indexText {
     font-size: 42px;
   }
@@ -417,6 +421,15 @@ body {
 
   .iphonesImg {
     width: 250px;
+  }
+
+  .comparator-section {
+    text-align: center;
+  }
+
+  .center-small {
+    text-align: center;
+    font-size: 36px;
   }
 }
 
@@ -443,5 +456,10 @@ body {
 
   .mobileBanner1 {
     width: 100%;
+  }
+
+  .laptop-img {
+    visibility: collapse;
+    display: none;
   }
 }
