@@ -201,12 +201,15 @@ body {
   border-radius: 5px;
   width: 50%;
   color: white;
-  font-size: 36px;
+  font-size: 24px;
   font-weight: 900;
+  padding: 2%;
+  text-decoration: none;
 }
 
 .like-red-button:hover {
   background-color: #e65050;
+  color: white;
 }
 
 .like-red-button:active {
@@ -220,13 +223,16 @@ body {
   border: none;
   border-radius: 5px;
   width: 50%;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: bold;
   padding: 1%;
+  text-decoration: none;
+  padding: 2%;
 }
 
 .blue-button:hover {
   background-color: #2a3f75;
+  color: white;
 }
 
 .blue-button:active {

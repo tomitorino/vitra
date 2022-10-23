@@ -58,10 +58,11 @@ const userSchema = new mongoose.Schema({
       releaseFrom: Number,
       releaseTo: Number,
       storage: String,
-      ram: String,
+      ram: Number,
       battery: String,
       cost: Number,
       camera: String,
+      type_of: String,
     },
   ],
 });
@@ -214,7 +215,10 @@ app.get("/preferences", function (req, res) {
       const prefBrand = req.body.brand;
       const prefYearFrom = req.body.releaseFrom;
       const prefYearTo = req.body.releaseTo;
+      const prefRam = req.body.ram;
+      const type_of = req.body.type_of;
       const currentUser = req.user._id;
+      console.log("ram: " + prefRam);
       User.updateOne(
         { _id: currentUser },
         {
@@ -222,6 +226,8 @@ app.get("/preferences", function (req, res) {
             brand: prefBrand,
             releaseFrom: prefYearFrom,
             releaseTo: prefYearTo,
+            ram: prefRam,
+            type_of: type_of,
           },
         },
         function (err) {
@@ -256,12 +262,14 @@ app.get("/comparator", function (req, res) {
   const storage_img = "../img/storage.png";
   const camera_img = "../img/camera.png";
   const price_img = "../img/price.png";
+  const loading = "../img/loading.gif";
   res.render("comparator", {
     battery_img: battery_img,
     ram_img: ram_img,
     storage_img: storage_img,
     camera_img: camera_img,
     price_img: price_img,
+    loading: loading,
   });
 });
 
@@ -281,14 +289,24 @@ app.get("/app", function (req, res) {
     const prefBrand = req.user.preferences[0].brand;
     const prefReleaseYearFrom = req.user.preferences[0].releaseFrom;
     const prefReleaseYearTo = req.user.preferences[0].releaseTo;
+    const prefRam = req.user.preferences[0].ram;
+    const prefTypeOf = req.user.preferences[0].type_of;
 
     var allDevices = devices.RECORDS;
     var sortedIds = function (element) {
-      if (prefBrand && prefReleaseYearFrom && prefReleaseYearTo) {
+      if (
+        prefBrand &&
+        prefReleaseYearFrom &&
+        prefReleaseYearTo &&
+        prefRam &&
+        prefTypeOf
+      ) {
         return (
           element.released_at >= prefReleaseYearFrom &&
           element.released_at <= prefReleaseYearTo &&
-          element.brand_id == prefBrand
+          element.brand_id == prefBrand &&
+          element.ram >= prefRam &&
+          element.type_of == prefTypeOf
         );
       }
 
@@ -297,11 +315,19 @@ app.get("/app", function (req, res) {
       }
 
       if (prefReleaseYearFrom) {
-        return element.released_at == prefReleaseYearFrom;
+        return element.released_at >= prefReleaseYearFrom;
       }
 
       if (prefReleaseYearTo) {
-        return element.released_at == prefReleaseYearTo;
+        return element.released_at <= prefReleaseYearTo;
+      }
+
+      if (prefRam) {
+        return element.ram >= prefRam;
+      }
+
+      if (prefTypeOf) {
+        return element.type_of == prefTypeOf;
       }
     };
 
@@ -356,6 +382,9 @@ app.get("/app", function (req, res) {
   const release = device.released_at;
   const releaseYear = release;
 
+  //RAM
+  const ram = Number(device.ram);
+
   app.post("/fav", function (req, res) {
     const actualDeviceId = req.body.deviceId;
     const currentUser = req.user._id;
@@ -378,7 +407,7 @@ app.get("/app", function (req, res) {
 
   app.post("/next", function (req, res) {
     const actualDeviceId = req.body.deviceId;
-    console.log(devices.RECORDS[actualDeviceId - 1].name + ": device skipped.");
+    //console.log(devices.RECORDS[actualDeviceId - 1].name + ": device skipped.");
     res.redirect("/app");
   });
 

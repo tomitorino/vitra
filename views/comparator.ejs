@@ -35,7 +35,7 @@
             </div>
             <br>
             <div id="pop-card1" class="">
-            <img id="device1img" src="https://fdn2.gsmarena.com/vv/bigpic/no3210b.gif"></img>
+            <img id="device1img" src="<%= loading %>"></img>
             <br><br>
             <p>
               <img src="<%= storage_img %>" alt="" width="20px" />
@@ -88,7 +88,7 @@
             </div>
             <br>
             <div id="pop-card2" class="">
-            <img id="device2img" src="https://fdn2.gsmarena.com/vv/bigpic/no3210b.gif"></img>
+            <img id="device2img" src="<%= loading %>"></img>
             <br><br>
             <p>
               <img src="<%= storage_img %>" alt="" width="20px" />
@@ -141,7 +141,7 @@
             </div>
             <br>
             <div id="pop-card3" class="">
-            <img id="device3img" src="https://fdn2.gsmarena.com/vv/bigpic/no3210b.gif"></img>
+            <img id="device3img" src="<%= loading %>"></img>
             <br><br>
             <p>
               <img src="<%= storage_img %>" alt="" width="20px" />
@@ -216,6 +216,27 @@
     document.getElementById("myoptions3").value = ''
     searchData3();
   }
+
+  let input1 = document.getElementById("myoptions1")
+  input1.addEventListener("keypress", function(e){
+    if(e.key === "Enter"){
+      searchData1()
+    }
+  })
+
+  let input2 = document.getElementById("myoptions2")
+  input2.addEventListener("keypress", function(e){
+    if(e.key === "Enter"){
+      searchData2()
+    }
+  })
+
+  let input3 = document.getElementById("myoptions3")
+  input3.addEventListener("keypress", function(e){
+    if(e.key === "Enter"){
+      searchData3()
+    }
+  })
 
 
 

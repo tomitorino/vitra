@@ -9,6 +9,15 @@
 
   
   <form action="/savePref" method="post">
+    <label>Tipo de dispositivo:</label>
+    <br>
+    <select name="type_of" id="type_of">
+      <option value="">Seleccionar</option>
+      <option value="Celular">Celular</option>
+      <option value="Tablet">Tablet</option>
+      <option value="Reloj">Reloj</option>
+    </select>
+    <br /><br />
     <label for="brand">Marca:</label>
     <br>
     <select name="brand" id="brand">
@@ -38,9 +47,28 @@
     />
     <br>
     <br>
-    <label for="ram">RAM:</label>
+    <label for="ram">RAM (mínimo):</label>
     <br>
-    <input type="number">
+    <select type="number" name="ram" id="ram">
+      <option value="">Seleccionar</option>
+      <option value="512">512 MB</option>
+      <option value="1024">1 GB</option>
+      <option value="2048">2 GB</option>
+      <option value="4096">4 GB</option>
+      <option value="8192">8 GB</option>
+    </select>
+    <br>
+    <br>
+    <label for="ram">Batería (mínimo):</label>
+    <br>
+    <select type="number" name="battery" id="battery">
+      <option value="">Seleccionar</option>
+      <option value="500">500 mAh</option>
+      <option value="1000">1000 mAh</option>
+      <option value="2000">2000 mAh</option>
+      <option value="4000">4000 mAh</option>
+      <option value="6000">6000 mAh</option>
+    </select>
     <br><br>
     <button class="btn btn-success" type="submit" />Guardar</button><br>
     <i style="font-size: 12px;">Guardá sin seleccionar nada para quitar los filtros.</i>
