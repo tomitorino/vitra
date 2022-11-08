@@ -14,8 +14,11 @@
           <div class="col-8 details-col">
             <div class="container">
               <div class="row">
-                <div class="col-12">
-                  <h1 class="appTitle"><%= device.name %></h1>
+                <div class="col-10">
+                  <h1 class="appTitle" id="deviceName"><%= device.name %></h1>
+                </div>
+                <div class="col-2">
+                  <small class="" id="isRecommended"></small>
                 </div>
               </div>
               <div class="row">
@@ -35,6 +38,13 @@
                 <div class="col-12">
                   <h3 class="appSubtitle">Memoria RAM</h3>
                   <p><%= device.ram %></p>
+                  <div class="progress">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      style="width: <%= ram %>%"
+                    ></div>
+                  </div>
                 </div>
               </div>
               <br />
@@ -94,6 +104,21 @@
     </div>
   </div>
 </div>
+
+<script>
+  var isRecommended = document.getElementById("isRecommended");
+  console.log(isRecommended);
+  var deviceName = document.getElementById("deviceName").innerHTML;
+  console.log(deviceName);
+
+  if (deviceName.includes("Samsung")) {
+    isRecommended.innerHTML = "Recomendado";
+    isRecommended.classList.add("isRecommended");
+  } else {
+    isRecommended.classList.remove("isRecommended");
+  }
+</script>
+
 <script>
   var tooltipTriggerList = [].slice.call(
     document.querySelectorAll('[data-bs-toggle="tooltip"]')

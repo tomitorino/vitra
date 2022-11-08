@@ -10,13 +10,25 @@
         <form action="/login" method="POST">
           <div class="mb-3">
             <label for="emailInput">Correo electrónico</label>
-            <input type="email" class="form-control" name="username" />
+            <input
+              type="email"
+              class="form-control"
+              name="username"
+              id="userInput"
+            />
           </div>
           <div class="mb-3">
             <label for="passwordInput">Contraseña</label>
-            <input type="password" class="form-control" name="password" />
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              id="passInput"
+            />
           </div>
-          <button type="submit" class="btn btn-primary">Ingresar</button>
+          <button type="submit" class="btn btn-primary" id="loginBtn">
+            Ingresar
+          </button>
         </form>
       </div>
     </div>

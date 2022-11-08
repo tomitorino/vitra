@@ -270,6 +270,7 @@ app.get("/comparator", function (req, res) {
     camera_img: camera_img,
     price_img: price_img,
     loading: loading,
+    user: req.user,
   });
 });
 
@@ -383,7 +384,7 @@ app.get("/app", function (req, res) {
   const releaseYear = release;
 
   //RAM
-  const ram = Number(device.ram);
+  const ram = (Number(device.ram) * 100) / 8192;
 
   app.post("/fav", function (req, res) {
     const actualDeviceId = req.body.deviceId;
@@ -416,6 +417,7 @@ app.get("/app", function (req, res) {
       device: device,
       battery: battery,
       release: releaseYear,
+      ram: ram,
     });
   } else {
     res.redirect("/login");
@@ -457,15 +459,20 @@ app.post("/login", function (req, res) {
     password: req.body.password,
   });
 
-  req.login(user, function (err) {
-    if (err) {
-      console.log(err);
-    } else {
-      passport.authenticate("local")(req, res, function () {
-        res.redirect("/app");
-      });
-    }
-  });
+  if (user.username == "" || user.password == "") {
+    // Esto revisa que ningun campo esté vacío
+    res.redirect("/login");
+  } else {
+    req.login(user, function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        passport.authenticate("local")(req, res, function () {
+          res.redirect("/app");
+        });
+      }
+    });
+  }
 });
 
 app.get("/admin", function (req, res) {

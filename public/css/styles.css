@@ -46,6 +46,21 @@ body {
   color: #21325e;
 }
 
+.comparatorButton {
+  background-color: #21325e;
+  color: white !important;
+  border-radius: 20px;
+}
+
+.comparatorButton:hover {
+  transform: scale(105%);
+}
+
+.comparatorButton:active {
+  transform: scale(95%);
+  background-color: #2132ff;
+}
+
 /* INDEX */
 
 .mainContainerIndex {
@@ -272,6 +287,15 @@ body {
 
 .frame {
   padding: 2%;
+}
+
+.isRecommended {
+  background-color: #21325e;
+  color: white;
+  border-radius: 15px;
+  padding: 3%;
+  padding-left: 6%;
+  padding-right: 6%;
 }
 
 .img-col {
