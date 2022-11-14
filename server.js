@@ -467,7 +467,11 @@ app.post("/login", function (req, res) {
       if (err) {
         console.log(err);
       } else {
-        passport.authenticate("local")(req, res, function () {
+        console.log("User: " + user);
+        passport.authenticate("local", {
+          successRedirect: "/app",
+          failureRedirect: "/login",
+        })(req, res, function () {
           res.redirect("/app");
         });
       }
