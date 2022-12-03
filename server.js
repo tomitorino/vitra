@@ -89,7 +89,7 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/google/app",
+      callbackURL: "http://vitra-project.herokuapp.com/auth/google/app",
       passReqToCallback: true,
       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
     },
