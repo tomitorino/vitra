@@ -720,11 +720,6 @@ app.get("/app", function (req, res) {
 
     rn = Math.floor(Math.random() * (filter.length - 0)) + 0;
     sortedDevice = filter[rn];
-
-    console.log("Filter lenght: " + filter.length);
-
-    console.log("Preferred brand: " + prefBrand);
-    console.log("Preferred release year: " + prefReleaseYearFrom);
   }
 
   if (sortedDevice) {
@@ -743,9 +738,12 @@ app.get("/app", function (req, res) {
 
   app.post("/fav", function (req, res) {
     const actualDeviceId = req.body.deviceId;
+    console.log(actualDeviceId);
     const currentUser = req.user._id;
-    console.log(devices.RECORDS[actualDeviceId - 1].name + ": device liked.");
-    console.log(req.user.username);
+    console.log(req.user.username + " liked:");
+    console.log(devices.RECORDS[actualDeviceId - 1].id);
+    console.log(devices.RECORDS[actualDeviceId - 1].name);
+    console.log(devices.RECORDS[actualDeviceId - 1].brand_id);
     User.updateOne(
       { _id: currentUser },
       { $push: { saved: { id: actualDeviceId - 1 } } },
