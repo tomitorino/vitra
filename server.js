@@ -59,8 +59,7 @@ const userSchema = new mongoose.Schema({
       releaseTo: Number,
       storage: String,
       ram: Number,
-      battery: String,
-      cost: Number,
+      battery_size: Number,
       camera: String,
       type_of: String,
     },
@@ -218,7 +217,8 @@ app.get("/preferences", function (req, res) {
       const prefRam = req.body.ram;
       const type_of = req.body.type_of;
       const currentUser = req.user._id;
-      console.log("ram: " + prefRam);
+      const prefBattery = req.body.battery_size;
+
       User.updateOne(
         { _id: currentUser },
         {
@@ -227,6 +227,7 @@ app.get("/preferences", function (req, res) {
             releaseFrom: prefYearFrom,
             releaseTo: prefYearTo,
             ram: prefRam,
+            battery_size: prefBattery,
             type_of: type_of,
           },
         },
@@ -292,9 +293,32 @@ app.get("/app", function (req, res) {
     const prefReleaseYearTo = req.user.preferences[0].releaseTo;
     const prefRam = req.user.preferences[0].ram;
     const prefTypeOf = req.user.preferences[0].type_of;
+    const prefBattery = req.user.preferences[0].battery_size;
 
     var allDevices = devices.RECORDS;
+
+    //ESTE CODIGO SE PODRÍA OPTIMIZAR PERO AUN NO ENCONTRÉ LA FORMA
     var sortedIds = function (element) {
+      /** ALL */
+      if (
+        prefBrand &&
+        prefReleaseYearFrom &&
+        prefReleaseYearTo &&
+        prefRam &&
+        prefTypeOf &&
+        prefBattery
+      ) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.released_at <= prefReleaseYearTo &&
+          element.brand_id == prefBrand &&
+          element.ram >= prefRam &&
+          element.type_of == prefTypeOf &&
+          element.battery_size >= prefBattery
+        );
+      }
+
+      /** 5 CONDITIONS */
       if (
         prefBrand &&
         prefReleaseYearFrom &&
@@ -311,6 +335,333 @@ app.get("/app", function (req, res) {
         );
       }
 
+      if (
+        prefBrand &&
+        prefReleaseYearFrom &&
+        prefReleaseYearTo &&
+        prefRam &&
+        prefBattery
+      ) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.released_at <= prefReleaseYearTo &&
+          element.brand_id == prefBrand &&
+          element.ram >= prefRam &&
+          element.battery_size >= prefBattery
+        );
+      }
+
+      if (
+        prefBrand &&
+        prefReleaseYearFrom &&
+        prefReleaseYearTo &&
+        prefTypeOf &&
+        prefBattery
+      ) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.released_at <= prefReleaseYearTo &&
+          element.brand_id == prefBrand &&
+          element.type_of == prefTypeOf &&
+          element.battery_size >= prefBattery
+        );
+      }
+
+      if (
+        prefBrand &&
+        prefReleaseYearFrom &&
+        prefRam &&
+        prefTypeOf &&
+        prefBattery
+      ) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.brand_id == prefBrand &&
+          element.ram >= prefRam &&
+          element.type_of == prefTypeOf &&
+          element.battery_size >= prefBattery
+        );
+      }
+
+      if (
+        prefBrand &&
+        prefReleaseYearTo &&
+        prefRam &&
+        prefTypeOf &&
+        prefBattery
+      ) {
+        return (
+          element.released_at <= prefReleaseYearTo &&
+          element.brand_id == prefBrand &&
+          element.ram >= prefRam &&
+          element.type_of == prefTypeOf &&
+          element.battery_size >= prefBattery
+        );
+      }
+
+      if (
+        prefReleaseYearFrom &&
+        prefReleaseYearTo &&
+        prefRam &&
+        prefTypeOf &&
+        prefBattery
+      ) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.released_at <= prefReleaseYearTo &&
+          element.ram >= prefRam &&
+          element.type_of == prefTypeOf &&
+          element.battery_size >= prefBattery
+        );
+      }
+
+      /** 4 CONDITIONS BATTERY */
+
+      if (prefBrand && prefReleaseYearFrom && prefReleaseYearTo && prefRam) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.released_at <= prefReleaseYearTo &&
+          element.brand_id == prefBrand &&
+          element.ram >= prefRam
+        );
+      }
+
+      if (prefBrand && prefReleaseYearFrom && prefReleaseYearTo && prefTypeOf) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.released_at <= prefReleaseYearTo &&
+          element.brand_id == prefBrand &&
+          element.type_of == prefTypeOf
+        );
+      }
+
+      if (prefBrand && prefReleaseYearFrom && prefRam && prefTypeOf) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.brand_id == prefBrand &&
+          element.ram >= prefRam &&
+          element.type_of == prefTypeOf
+        );
+      }
+
+      if (prefBrand && prefReleaseYearTo && prefRam && prefTypeOf) {
+        return (
+          element.released_at <= prefReleaseYearTo &&
+          element.brand_id == prefBrand &&
+          element.ram >= prefRam &&
+          element.type_of == prefTypeOf
+        );
+      }
+
+      if (prefReleaseYearFrom && prefReleaseYearTo && prefRam && prefTypeOf) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.released_at <= prefReleaseYearTo &&
+          element.ram >= prefRam &&
+          element.type_of == prefTypeOf
+        );
+      }
+
+      /** 4 CONDITIONS TYPE OF */
+
+      if (
+        prefBrand &&
+        prefReleaseYearFrom &&
+        prefReleaseYearTo &&
+        prefBattery
+      ) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.released_at <= prefReleaseYearTo &&
+          element.brand_id == prefBrand &&
+          element.battery_size >= prefBattery
+        );
+      }
+
+      if (prefBrand && prefReleaseYearFrom && prefRam && prefBattery) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.brand_id == prefBrand &&
+          element.ram >= prefRam &&
+          element.battery_size >= prefBattery
+        );
+      }
+
+      if (prefBrand && prefReleaseYearTo && prefRam && prefBattery) {
+        return (
+          element.released_at <= prefReleaseYearTo &&
+          element.brand_id == prefBrand &&
+          element.ram >= prefRam &&
+          element.battery_size >= prefBattery
+        );
+      }
+
+      if (prefReleaseYearFrom && prefReleaseYearTo && prefRam && prefBattery) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.released_at <= prefReleaseYearTo &&
+          element.ram >= prefRam &&
+          element.battery_size >= prefBattery
+        );
+      }
+
+      /** 4 CONDITIONS RAM */
+
+      if (prefBrand && prefReleaseYearFrom && prefTypeOf && prefBattery) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.brand_id == prefBrand &&
+          element.type_of == prefTypeOf &&
+          element.battery_size >= prefBattery
+        );
+      }
+
+      if (prefBrand && prefReleaseYearTo && prefTypeOf && prefBattery) {
+        return (
+          element.released_at <= prefReleaseYearTo &&
+          element.brand_id == prefBrand &&
+          element.type_of == prefTypeOf &&
+          element.battery_size >= prefBattery
+        );
+      }
+
+      if (
+        prefReleaseYearFrom &&
+        prefReleaseYearTo &&
+        prefTypeOf &&
+        prefBattery
+      ) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.released_at <= prefReleaseYearTo &&
+          element.type_of == prefTypeOf &&
+          element.battery_size >= prefBattery
+        );
+      }
+
+      /** 4 CONDITIONS YEAR TO */
+
+      if (prefBrand && prefRam && prefTypeOf && prefBattery) {
+        return (
+          element.brand_id == prefBrand &&
+          element.ram >= prefRam &&
+          element.type_of == prefTypeOf &&
+          element.battery_size >= prefBattery
+        );
+      }
+
+      if (prefReleaseYearFrom && prefRam && prefTypeOf && prefBattery) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.ram >= prefRam &&
+          element.type_of == prefTypeOf &&
+          element.battery_size >= prefBattery
+        );
+      }
+
+      /** 4 CONDITIONS YEAR FROM */
+
+      if (prefReleaseYearTo && prefRam && prefTypeOf && prefBattery) {
+        return (
+          element.released_at <= prefReleaseYearTo &&
+          element.ram >= prefRam &&
+          element.type_of == prefTypeOf &&
+          element.battery_size >= prefBattery
+        );
+      }
+
+      /** 3 CONDITIONS BATTERY TYPEOF*/
+
+      if (prefBrand && prefReleaseYearFrom && prefReleaseYearTo) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.released_at <= prefReleaseYearTo &&
+          element.brand_id == prefBrand
+        );
+      }
+
+      if (prefBrand && prefReleaseYearFrom && prefRam) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.brand_id == prefBrand &&
+          element.ram >= prefRam
+        );
+      }
+
+      if (prefBrand && prefReleaseYearTo && prefRam) {
+        return (
+          element.released_at <= prefReleaseYearTo &&
+          element.brand_id == prefBrand &&
+          element.ram >= prefRam
+        );
+      }
+
+      if (prefReleaseYearFrom && prefReleaseYearTo && prefRam) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.released_at <= prefReleaseYearTo &&
+          element.ram >= prefRam
+        );
+      }
+
+      /** 3 CONDITIONS RELEASES 2 */
+
+      if (prefBrand && prefRam && prefTypeOf) {
+        return (
+          element.brand_id == prefBrand &&
+          element.ram >= prefRam &&
+          element.type_of == prefTypeOf
+        );
+      }
+
+      if (prefBrand && prefRam && prefBattery) {
+        return (
+          element.brand_id == prefBrand &&
+          element.ram >= prefRam &&
+          element.battery_size >= prefBattery
+        );
+      }
+
+      if (prefRam && prefTypeOf && prefBattery) {
+        return (
+          element.ram >= prefRam &&
+          element.type_of == prefTypeOf &&
+          element.battery_size >= prefBattery
+        );
+      }
+
+      if (prefBrand && prefTypeOf && prefBattery) {
+        return (
+          element.brand_id == prefBrand &&
+          element.type_of == prefTypeOf &&
+          element.battery_size >= prefBattery
+        );
+      }
+
+      /** 2 CONDITIONS */
+
+      if (prefReleaseYearFrom && prefReleaseYearTo) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.released_at <= prefReleaseYearTo
+        );
+      }
+
+      if (prefBrand && prefReleaseYearFrom) {
+        return (
+          element.released_at >= prefReleaseYearFrom &&
+          element.brand_id == prefBrand
+        );
+      }
+
+      if (prefBrand && prefReleaseYearTo) {
+        return (
+          element.released_at <= prefReleaseYearTo &&
+          element.brand_id == prefBrand
+        );
+      }
+
+      /** 1 CONDITION */
       if (prefBrand) {
         return element.brand_id == prefBrand;
       }
@@ -329,6 +680,10 @@ app.get("/app", function (req, res) {
 
       if (prefTypeOf) {
         return element.type_of == prefTypeOf;
+      }
+
+      if (prefBattery) {
+        return element.battery_size >= prefBattery;
       }
     };
 
@@ -366,10 +721,10 @@ app.get("/app", function (req, res) {
     rn = Math.floor(Math.random() * (filter.length - 0)) + 0;
     sortedDevice = filter[rn];
 
-    console.log(filter.length);
+    console.log("Filter lenght: " + filter.length);
 
-    console.log(prefBrand);
-    console.log(prefReleaseYearFrom);
+    console.log("Preferred brand: " + prefBrand);
+    console.log("Preferred release year: " + prefReleaseYearFrom);
   }
 
   if (sortedDevice) {
@@ -377,7 +732,7 @@ app.get("/app", function (req, res) {
   }
 
   //Battery
-  const battery = Number(device.battery_size) / 60;
+  const battery_size = Number(device.battery_size) / 60;
 
   //Release year
   const release = device.released_at;
@@ -415,7 +770,7 @@ app.get("/app", function (req, res) {
   if (req.isAuthenticated()) {
     res.render("app", {
       device: device,
-      battery: battery,
+      battery_size: battery_size,
       release: releaseYear,
       ram: ram,
     });
